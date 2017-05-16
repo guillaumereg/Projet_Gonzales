@@ -1,12 +1,17 @@
-let express=require('express');
-var app=express();
+var http = require('http');
+var fs = require('fs');
 
-app.listen(8080,function(){
-    console.log('Server running on port 8080');
-});
+function onRequest(request, response) {
+    response.writeHead(200, {'Content-Type': 'text/html'});
+    fs.readFile('./index.html', null, function(error, data) {
+        if (error) {
+            response.writeHead(404);
+            response.write('File not found!');
+        } else {
+            response.write(data);
+        }
+        response.end();
+    });
+}
 
-app.get('/', function(req,res)
-            {
-                res.send("Hello World from server.js");
-            });
-
+http.createServer(onRequest).listen(8080);
