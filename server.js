@@ -1,17 +1,10 @@
-var http = require('http');
-var fs = require('fs');
+var express = require('express'),
+	app		= express();
 
-function onRequest(request, response) {
-    response.writeHead(200, {'Content-Type': 'text/html'});
-    fs.readFile('./index.html', null, function(error, data) {
-        if (error) {
-            response.writeHead(404);
-            response.write('File not found!');
-        } else {
-            response.write(data);
-        }
-        response.end();
-    });
-}
+app.get('/', function(req,res){ //=define routes, when someone makes aget request to root directory, respond by sending file named index.html
+	res.sendFile(__dirname + '/index.html');
+});
 
-http.createServer(onRequest).listen(8000);
+app.listen(8000, function(){ //listen on port 8000 and handle requests on it.
+	console.log('Je vous écoute...');
+});
