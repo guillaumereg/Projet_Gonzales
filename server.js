@@ -1,4 +1,4 @@
-var express = require('express'),
+var express = require('express'), //importer module express
 	app		= express();
 
 app.get('/', function(req,res){ //=define routes, when someone makes a get request to root directory, respond by sending file named index.html
