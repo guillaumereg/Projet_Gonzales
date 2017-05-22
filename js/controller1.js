@@ -6,8 +6,6 @@ app.controller("controller1", ['$scope','$resource',
 			$scope.meetups = results;
 		});
 
-		$scope.meetups = []
-
 		$scope.createMeetup = function(){ //rentre pas
 			var meetup = new Meetup();
 			meetup.name = $scope.meetupName;
