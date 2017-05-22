@@ -1,13 +1,20 @@
 app.controller("controller1", ['$scope','$resource',
 	function($scope, $resource){
-		$scope.meetups = [
-			{name: "MEAN SF Developers"},
-			{name: "Some other meetups"}
-		]
+		var Meetup = $resource('/api/meetups');  // -> create get route
+
+		Meetup.query(function(results){  //find meetups
+			$scope.meetups = results;
+		});
+
+		$scope.meetups = []
 
 		$scope.createMeetup = function(){ //rentre pas
-			$scope.meetups.push({name: $scope.meetupName});
-			$scope.meetupName = "";
+			var meetup = new Meetup();
+			meetup.name = $scope.meetupName;
+			meetup.$save(function(result){ //server->database->collection
+				$scope.meetups.push(result);  //add new meetup to our collection 
+				$scope.meetupName = '';
+			});
 		}
 	}
 ]);
