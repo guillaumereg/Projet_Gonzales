@@ -1,15 +1,17 @@
 app.controller("controller1", ['$scope','$resource',
 	function($scope, $resource){
-		var Meetup = $resource('/api/meetups');  // -> create get route
-
-		Meetup.query(function(results){  //find meetups
-			$scope.meetups = results;
+		var Meetup = $resource('/api/meetups');  //=base URL of restful service
+		//object can use methods get, save, query, remove and delete
+		Meetup.query(function(results){  //GET: all meetups   results come from res.json
+			$scope.meetups = results;   //data returned by the server
 		});
 
-		$scope.createMeetup = function(){ //rentre pas
-			var meetup = new Meetup();
+		$scope.meetups = [];
+
+		$scope.createMeetup = function(){ 
+			var meetup = new Meetup();   //instance of resource class Meetup
 			meetup.name = $scope.meetupName;
-			meetup.$save(function(result){ //server->database->collection
+			meetup.$save(function(result){ //POST: meetup   result comes from res.json
 				$scope.meetups.push(result);  //add new meetup to our collection 
 				$scope.meetupName = '';
 			});
