@@ -1,0 +1,14 @@
+{
+  "name": "projet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "\"echo hello\""
+  },
+  "author": "gui",
+  "license": "ISC",
+  "dependencies": {
+    "morgan": "^1.8.2"
+  }
+}

@@ -1,0 +1,19 @@
+<div class= "page-header">
+	<h1>User registration </h1>
+</div>
+
+<form ng-submit="register.regUser(regData);">    <!-- passer les données de ngmodels en 1 objet, utiliser fonction regUser  -->
+
+	<label>Username: </label>
+	<input class="form-control" type="text" name="username" ng-model="register.regData.username">
+	<br>
+
+	<label>Age: </label>
+	<input class="form-control" type="text" name="age" ng-model="register.regData.age">
+	<br>
+
+	<label>Password: </label>
+	<input class="form-control" type="password" name="password" ng-model="register.regData.password">
+	<br>
+	<button class= "btn btn-primary" type= "submit"> Register </button>
+</form>
