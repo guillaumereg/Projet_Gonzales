@@ -1,0 +1,15 @@
+<div class= "page-header">
+	<h1>User login </h1>
+</div>
+
+<form ng-submit="login.logUser(logData);">    
+
+	<label>Username: </label>
+	<input class="form-control" type="text" name="username" ng-model="login.logData.username">
+	<br>
+
+	<label>Password: </label>
+	<input class="form-control" type="password" name="password" ng-model="login.logData.password">
+	<br>
+	<button class= "btn btn-primary" type= "submit"> Log in </button>
+</form>
