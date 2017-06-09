@@ -1,6 +1,6 @@
 angular.module('appRoutes', ['ngRoute'])      //ng route to create route
 
-    .config(function($routeProvider, $locationProvider) {
+    .config(function($routeProvider, $locationProvider) {  //location.path pour changer ou href
         $routeProvider
 
             .when('/login', {  //= default location
@@ -13,14 +13,13 @@ angular.module('appRoutes', ['ngRoute'])      //ng route to create route
                 controllerAs: 'register' //utiliser dans register.html pour on submit
             })
 
-            .when('/home', {  //= default location
+            .when('/home', { 
                 templateUrl: 'views/home.html'
             })
            
             .when('/about', {
                 templateUrl: 'views/about.html'
             })
-
       
             .otherwise({ redirectTo: '/login' });
 
