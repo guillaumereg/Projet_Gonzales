@@ -1,3 +1,20 @@
-<div class="page-header">
-	<h1> hello from rent my car </h1>
+<div class= "page-header">
+	<h1>Rent my car </h1>
 </div>
+
+<form ng-submit="createOffer()">    
+
+	<label>Brand: </label>
+	<input class="form-control" name="brand" type="text" ng-model="offerData.brand">
+	<br>
+
+	<label>Model: </label>
+	<input class="form-control" name="model"type="text" ng-model="offerData.model">
+	<br>
+
+	<label>Price per day in euros: </label>
+	<input class="form-control" name="price" type="text" ng-model="offerData.price">
+	<br>
+
+	<button class= "btn btn-primary" type= "submit"> Save offer </button>
+</form>

@@ -1,6 +1,9 @@
-var User = require('../models/user'); // Important the database User Model created with Mongoose Schema
+var User = require('../models/user');
+var Offer = require('../models/offer');
+
 var jwt = require('jsonwebtoken');
 var secret = 'valarmorghulis';
+
 // Export routes to the main server.js file
 module.exports = function(router) {
     router.post('/profile', function(req, res) { //enregistrer un profil
@@ -77,6 +80,39 @@ module.exports = function(router) {
     router.post('/getInfo', function(req, res){ //decrypte le token en utilisant middleware et renvoie au client
         res.send(req.decoded);
     });
+
+
+
+
+
+    router.post('/offer', function(req, res) { //enregistrer une offre de louage
+        var offer = new Offer(); 
+        offer.username = req.body.username; 
+        offer.brand = req.body.brand;
+        offer.model = req.body.model;
+        offer.price = req.body.price;
+        if (req.body.username == null || req.body.username == '' 
+         || req.body.brand == null || req.body.brand == '' 
+         || req.body.model == null || req.body.model == '' 
+         || req.body.price == null|| req.body.price == '' ) {
+            res.json({ success: false, message: 'données ne sont pas complètes' });
+        } 
+        else {
+            offer.save(function(err) { //sauver dans la base de données
+                if (err) {
+                    res.json({ success: false, message: 'Faute de format d entrée' });
+                } else {
+                    res.json({ success: true, message: 'offre crée!' }); //utilisateur a été sauvé, renvoyer réponse
+                }
+            });
+        }
+    });
+
+
+
+
+
+
 
     return router; // Retourne le router vers le serveur
 }

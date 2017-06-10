@@ -8,9 +8,9 @@ var path = require('path');
 var router = express.Router();
 
 var User = require('./backend/models/user.js');
-var appRoutes = require('./backend/routes/api.js')(router);
-//require('./passport.js');
+var Offer = require('./backend/models/offer.js');
 
+var appRoutes = require('./backend/routes/api.js')(router);
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -20,16 +20,7 @@ app.use('/api',appRoutes);
 
 
 mongoose.connect('mongodb://localhost/rentCar');
-/**
-app.use(passport.initialize());
-app.use(passport.session());
 
-
-
-//app.use('/js', express.static(path.join(__dirname + '../js')));
-app.use(express.static(path.join(__dirname, '../client')));
-
-**/
 
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, '/frontend/index.html'));

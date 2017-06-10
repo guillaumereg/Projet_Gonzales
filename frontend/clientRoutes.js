@@ -24,7 +24,9 @@ angular.module('appRoutes', ['ngRoute'])      //ng route to create route
             })
 
             .when('/rentMyCar', {
-                templateUrl: 'views/rentMyCar.html'
+                templateUrl: 'views/rentMyCar.html',
+                controller: 'offerCtrl',
+                controllerAs: 'offer'
             })
       
             .otherwise({ 

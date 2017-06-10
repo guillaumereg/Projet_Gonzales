@@ -14,7 +14,6 @@ angular.module('mainController', ['authServices'])
             else{  //connecté
                 console.log('user is logged in');
                 Auth.getUser().then(function(data){
-                    console.log(data.data.username);
                     app.username = data.data.username;
                 });
                 app.loggedIn = true;
