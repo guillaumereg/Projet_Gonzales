@@ -4,7 +4,7 @@ angular.module('registerCtrl', ['userServices']) //utiliser module userServices 
 
         $scope.regUser = function() {
             User.create($scope.regData).then(function(data){
-                if (data.data.success) {  // rediriger vers la page principale en cas de succes
+                if (data.data.success) {  // rediriger vers la page de login en cas de succes
                     $location.path('/');
                 } else {
                     console.log(data.data.message);

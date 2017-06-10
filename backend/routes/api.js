@@ -8,12 +8,21 @@ module.exports = function(router) {
         user.username = req.body.username; 
         user.password = req.body.password;
         user.age = req.body.age;
-        if (req.body.username == null || req.body.username == '' || req.body.password == null || req.body.password == '') {
-            res.json({ success: false, message: 'Identifiant et/ou mot de passe doivent être spécifiés' });
-        } else {
+        user.phoneNumber = req.body.phoneNumber;
+        user.country = req.body.country;
+        user.city = req.body.city;
+        if (req.body.username == null || req.body.username == '' 
+         || req.body.password == null || req.body.password == '' 
+         || req.body.age == null || req.body.age == '' 
+         || req.body.phoneNumber == null|| req.body.phoneNumber == '' 
+         || req.body.country == null || req.body.country == '' 
+         || req.body.city == null || req.body.city == '') {
+            res.json({ success: false, message: 'données ne sont pas complètes' });
+        } 
+        else {
             user.save(function(err) { //sauver dans la base de données
                 if (err) {
-                    res.json({ success: false, message: 'Cet identifiant existe déja / age doit être un nombre' });
+                    res.json({ success: false, message: 'Cet identifiant existe déja ou faute de format d entrée' });
                 } else {
                     res.json({ success: true, message: 'user created!' }); //utilisateur a été sauvé, renvoyer réponse
                 }
@@ -26,7 +35,7 @@ module.exports = function(router) {
             res.json({ success: false, message: 'Identifiant et/ou mot de passe doivent être spécifiés' });
         }
         else{                                                   //attributs qu'on veut avoir dans variable user
-            User.findOne({ username: req.body.username}).select('username age password').exec(function(err,user){
+            User.findOne({ username: req.body.username}).select('username password age phoneNumber country city').exec(function(err,user){
                 if(err){
                     throw err;
                 }
@@ -35,7 +44,8 @@ module.exports = function(router) {
                 }
                 else if(user){            //= mot de passe soumis
                     if(user.checkPassword(req.body.password)){  //user est connecté
-                        var token = jwt.sign({username: user.username, age: user.age, password: user.password}, secret, {expiresIn: '1h'});
+                        var token = jwt.sign({username: user.username, password: user.password, age: user.age, 
+                                           phoneNumber: user.phoneNumber, country: user.country, city: user.city }, secret, {expiresIn: '1h'});
                         res.json({ success: true, message: 'user loggs in' , token: token});
                     }
                     else{
@@ -54,7 +64,7 @@ module.exports = function(router) {
                     res.json({ success: false, message: 'token non valide' });
                 }
                 else{
-                    req.decoded = decoded;    //maintenant accessible dans req de /profil
+                    req.decoded = decoded;    //maintenant accessible dans req de /getInfo
                     next(); // prochain route
                 }
             });
@@ -66,7 +76,6 @@ module.exports = function(router) {
 
     router.post('/getInfo', function(req, res){ //decrypte le token en utilisant middleware et renvoie au client
         res.send(req.decoded);
-        //res.send('blabla');
     });
 
     return router; // Retourne le router vers le serveur
