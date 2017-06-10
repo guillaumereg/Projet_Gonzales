@@ -1,18 +1,23 @@
-angular.module('loginCtrl', ['authServices'])
-    .controller('logCtrl', function($location, Auth, $route, $rootScope) {   
+angular.module('mainController', ['authServices'])
+    .controller('mainCtrl', function($location, Auth, $route, $rootScope) {   
         var app = this;
 
-        $rootScope.$on('$routeChangeStart', function(){ // à chaque changement de route
-            if(Auth.isLoggedIn()){
+        $rootScope.$on('$routeChangeStart', function(event, next){ // intercepter changement de route
+            if(!Auth.isLoggedIn()){//pas connecté 
+                console.log('user is NOT logged in');
+                app.username = '';
+                app.loggedIn = false;
+                if(!next.isLogin){  //prochaine location requiert qu'il soit login
+                    $location.path('/');  //rediriger vers page login
+                }
+            }
+            else{  //connecté
                 console.log('user is logged in');
                 Auth.getUser().then(function(data){
                     console.log(data.data.username);
                     app.username = data.data.username;
                 });
-            }
-            else{
-                console.log('user is NOT logged in');
-                app.username = '';
+                app.loggedIn = true;
             }
         })
 
@@ -30,6 +35,7 @@ angular.module('loginCtrl', ['authServices'])
 
         app.logout = function(){
             Auth.logout();
-            $location.path('/login');
+            $location.path('/');
+            $route.reload();
         };
     });
