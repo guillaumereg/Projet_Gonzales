@@ -19,7 +19,8 @@ angular.module('appRoutes', ['ngRoute'])      //ng route to create route
             })
            
             .when('/rentCar', {
-                templateUrl: 'views/rentCar.html'
+                templateUrl: 'views/rentCar.html',
+                controller: 'searchOffersCtrl'
             })
 
             .when('/rentMyCar', {
@@ -29,7 +30,7 @@ angular.module('appRoutes', ['ngRoute'])      //ng route to create route
 
             .when('/myOffers', {
                 templateUrl: 'views/myOffers.html',
-                controller: 'myOffersCtrl'
+                controller: 'myOffersCtrl'         
             })
       
             .otherwise({ 

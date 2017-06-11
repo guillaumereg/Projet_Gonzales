@@ -1,3 +1,30 @@
 <div class="page-header">
-	<h1> hello from rent a car </h1>
+
+	<form ng-submit="findOffers()">
+		<label>Brand: </label>
+		<input class="form-control" style="width: 300px" name="brand" type="text" ng-model="searchData.brand">
+		<br>
+
+		<label>Model: </label>
+		<input class="form-control" style="width: 300px" name="model" type="text" ng-model="searchData.model">
+		<br>
+
+		<button class= "btn btn-primary" type= "submit"> Search </button>
+	</form>
+
+	<table ng-show="resultsArrived" class="table">
+		<tr>
+			<td> <strong> Username</strong> </td>
+			<td> <strong> Brand </strong> </td>
+			<td> <strong> Model </strong> </td>
+			<td> <strong> € Per day </strong> </td>
+		</tr>
+
+		<tr ng-repeat="result in results">
+			<td>{{result.username}}</td>
+			<td>{{result.brand}}</td>
+			<td>{{result.model}}</td>
+			<td>{{result.price}}</td>
+		</tr>
+	</table>
 </div>

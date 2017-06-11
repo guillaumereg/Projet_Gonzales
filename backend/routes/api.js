@@ -130,6 +130,21 @@ module.exports = function(router) {
     });
 
 
+    router.post('/searchOffer', function(req, res) { //envoie liste des offres de location d'autres utilisateurs
+        console.log(req.body);
+        Offer.find(req.body)
+        .select('username brand model price').exec(function(err,offers){
+            if(err){
+                console.log(err);
+                res.json({ success: false, message: 'impossible de chercher des offres' });
+            }
+            else{
+                res.json({ success: true, message: 'existing offers sent to user' , offers: offers});
+            }
+        });
+    });  
+
+
     return router; // Retourne le router vers le serveur
 }
 
