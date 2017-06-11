@@ -7,10 +7,10 @@ angular.module('offerController', ['offerServices', 'authServices']) //utiliser 
             Auth.getUser().then(function(data){
                 var username = data.data.username;
                 console.log(username);
-                Offer.create({brand: $scope.offerData.brand, model: $scope.offerData.brand, 
+                Offer.create({brand: $scope.offerData.brand, model: $scope.offerData.model, 
                               price: $scope.offerData.price, username: data.data.username})
                 .then(function(data){
-                    if (data.data.success) {  // rediriger vers la page de login en cas de succes
+                    if (data.data.success) { 
                         $location.path('/home');
                     } else {
                         console.log(data.data.message);

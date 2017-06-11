@@ -11,7 +11,6 @@ angular.module('appRoutes', ['ngRoute'])      //ng route to create route
             .when('/register', {
                 templateUrl: 'views/register.html',
                 controller: 'regCtrl',
-                controllerAs: 'register', //utiliser dans register.html pour on submit
                 isLogin: true
             })
 
@@ -25,8 +24,12 @@ angular.module('appRoutes', ['ngRoute'])      //ng route to create route
 
             .when('/rentMyCar', {
                 templateUrl: 'views/rentMyCar.html',
-                controller: 'offerCtrl',
-                controllerAs: 'offer'
+                controller: 'offerCtrl'
+            })
+
+            .when('/myOffers', {
+                templateUrl: 'views/myOffers.html',
+                controller: 'myOffersCtrl'
             })
       
             .otherwise({ 

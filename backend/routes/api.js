@@ -81,10 +81,6 @@ module.exports = function(router) {
         res.send(req.decoded);
     });
 
-
-
-
-
     router.post('/offer', function(req, res) { //enregistrer une offre de louage
         var offer = new Offer(); 
         offer.username = req.body.username; 
@@ -108,10 +104,30 @@ module.exports = function(router) {
         }
     });
 
+    router.post('/myOffers', function(req, res) { //envoie liste des offres de louage l'utilisateur
+        Offer.find({ username: req.body.username})
+        .select('brand model price').exec(function(err,offers){
+            if(err){
+                throw err;
+            }
+            else{
+                res.json({ success: true, message: 'offer sent back to user' , offers: offers});
+            }
+        });
+    });
 
 
-
-
+    router.post('/removeOffer', function(req, res) { //envoie liste des offres de louage l'utilisateur
+        Offer.remove({ _id: req.body.offerId})
+        .exec(function(err,offers){
+            if(err){
+                res.json({ success: false, message: 'impossible de supprimer cette offre' });
+            }
+            else{
+                res.json({ success: true, message: 'offre supprimée' });
+            }
+        });
+    });
 
 
     return router; // Retourne le router vers le serveur

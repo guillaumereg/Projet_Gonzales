@@ -1,0 +1,22 @@
+<div class="page-header">
+	<h3> {{main.username}} </h3>
+
+	<table class="table">
+		<tr>
+			<td> <strong> Brand </strong> </td>
+			<td> <strong> Model </strong> </td>
+			<td> <strong> € Per day </strong> </td>
+			<td> <strong> Delete</strong> </td>
+		</tr>
+
+		<tr ng-repeat="offer in offers">
+			<td>{{offer.brand}}</td>
+			<td>{{offer.model}}</td>
+			<td>{{offer.price}}</td>
+			<td>
+				 <button ng-click="deleteOffer(offer)" type="button" class="btn btn-danger">Delete offer</button>
+			</td>
+		</tr>
+	</table>
+
+</div>
