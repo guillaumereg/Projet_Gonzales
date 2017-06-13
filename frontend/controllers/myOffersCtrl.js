@@ -3,7 +3,7 @@ angular.module('myOffersController', ['offerServices', 'authServices']) //utilis
     .controller('myOffersCtrl', function($location, Offer, Auth, $route, $scope) {   //add factory User !!!! pour utiliser ce factory du module  userservices
 
         Auth.getUser().then(function(data){
-            Offer.getByUsername({username: data.data.username}) //get all offers from user from database
+            Offer.getOffersByUsername({username: data.data.username}) //get all offers from user from database
             .then(function(data){
                 if (data.data.success) {  
                     $scope.offers = data.data.offers;

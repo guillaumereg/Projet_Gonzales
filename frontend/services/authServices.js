@@ -56,7 +56,7 @@ angular.module('authServices', [])
 		return authTokenFactory;
 	})
 
-	.factory('AuthEveryRequest', function(AuthToken){
+	.factory('AuthEveryRequest', function(AuthToken){ //est exécuté à chaque requete par fonction dans app.js
 		var authEveryRequestFactory = {};
 
 		authEveryRequestFactory.request = function(config){

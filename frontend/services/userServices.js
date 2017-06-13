@@ -7,5 +7,9 @@ angular.module('userServices', [])
 		userFactory.create = function(regData) {
 			return $http.post('/api/profile', regData); // Return data from end point to controller
 		};
+
+		userFactory.getUserByUsername = function(username) {
+			return $http.post('/api/getProfile', username); // Return data from end point to controller
+		};
 		return userFactory;
 	});

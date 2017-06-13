@@ -12,7 +12,7 @@
 		<button class= "btn btn-primary" type= "submit"> Search </button>
 	</form>
 
-	<table ng-show="resultsArrived" class="table">
+	<table ng-show="showResults" class="table" style="margin-top : 50px" >
 		<tr>
 			<td> <strong> Username</strong> </td>
 			<td> <strong> Brand </strong> </td>
@@ -21,10 +21,25 @@
 		</tr>
 
 		<tr ng-repeat="result in results">
-			<td>{{result.username}}</td>
+			<td> <a href='#' ng-click = "goToProfile(result.username)">{{result.username}}</a></td>
 			<td>{{result.brand}}</td>
 			<td>{{result.model}}</td>
 			<td>{{result.price}}</td>
 		</tr>
 	</table>
+
+	<table ng-show="showProfile" class="table" style="margin-top : 50px" >
+		<strong> {{profile.username}} </strong>
+		<tr>
+			<td> <strong> Country</strong> </td>
+			<td> <strong> City </strong> </td>
+			<td> <strong> Phone number </strong> </td>
+		</tr>
+		<tr>
+			<td>{{profile.country}}</td>
+			<td>{{profile.city}}</td>
+			<td>{{profile.phoneNumber}}</td>
+		</tr>
+	</table>
+	
 </div>

@@ -8,7 +8,7 @@ angular.module('offerServices', [])
 			return $http.post('/api/offer', offerData); // Return data from end point to controller
 		};
 
-		offerFactory.getByUsername = function(username) {
+		offerFactory.getOffersByUsername = function(username) {
 			return $http.post('/api/myOffers', username); // Return data from end point to controller
 		};
 
