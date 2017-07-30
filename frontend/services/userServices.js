@@ -11,5 +11,8 @@ angular.module('userServices', [])
 		userFactory.getUserByUsername = function(username) {
 			return $http.post('/api/getProfile', username); // Return data from end point to controller
 		};
+		userFactory.changeMyProfil = function(username) {
+			return $http.post('/api/changeProfile', username); // Return data from end point to controller
+		};
 		return userFactory;
 	});

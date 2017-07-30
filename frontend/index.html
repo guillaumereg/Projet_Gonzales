@@ -19,10 +19,13 @@
     <script src="controllers/mainCtrl.js"> </script>
     <script src="controllers/offerCtrl.js"> </script>
     <script src="controllers/myOffersCtrl.js"> </script>
+    <script src="controllers/myProfilCtrl.js"> </script>
+    <script src="controllers/changeProfilCtrl.js"> </script>
     <script src="controllers/searchOffersCtrl.js"> </script>
     <script src="services/userServices.js"> </script>
     <script src="services/authServices.js"> </script>
     <script src="services/offerServices.js"> </script>
+
   </head>
 
   <body ng-controller= "mainCtrl as main">      <!-- login est le nouveau nom du controlleur -->
@@ -44,6 +47,7 @@
             <li ng-show = "main.loggedIn"><a href="/rentCar">Rent a car</a></li>
             <li ng-show = "main.loggedIn"><a href="/rentMyCar">Rent my car</a></li>
             <li ng-show = "main.loggedIn"><a href="/myOffers">My offers</a></li>
+            <li ng-show = "main.loggedIn"><a href="/myProfil">My profil</a></li>
             <li ng-show = "main.loggedIn" ng-click = "main.logout();" ><a href="#">Logout</a></li>
             <li ng-show = "!main.loggedIn"><a href="/">Login</a></li>
             <li ng-show = "!main.loggedIn"><a href="/register">Register</a></li>

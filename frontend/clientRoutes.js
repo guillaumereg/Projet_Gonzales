@@ -7,17 +7,17 @@ angular.module('appRoutes', ['ngRoute'])      //ng route to create route
                 templateUrl: 'views/login.html',
                 isLogin: true  //ne requiert pas de login pour y accéder
             })
-           
+
             .when('/register', {
                 templateUrl: 'views/register.html',
                 controller: 'regCtrl',
                 isLogin: true
             })
 
-            .when('/home', { 
+            .when('/home', {
                 templateUrl: 'views/home.html'
             })
-           
+
             .when('/rentCar', {
                 templateUrl: 'views/rentCar.html',
                 controller: 'searchOffersCtrl'
@@ -30,11 +30,22 @@ angular.module('appRoutes', ['ngRoute'])      //ng route to create route
 
             .when('/myOffers', {
                 templateUrl: 'views/myOffers.html',
-                controller: 'myOffersCtrl'         
+                controller: 'myOffersCtrl'
             })
-      
-            .otherwise({ 
-                templateUrl: 'views/unknown.html' 
+
+            .when('/myProfil', {
+                templateUrl: 'views/myProfil.html' ,
+                controller: 'myProfilCtrl'
+
+            })
+            .when('/changeProfil', {
+                templateUrl: 'views/changeProfil.html' ,
+                controller: 'changeProfilCtrl'
+
+            })
+
+            .otherwise({
+                templateUrl: 'views/unknown.html'
             });
 
         $locationProvider.html5Mode({ enabled: true, requireBase: false });
