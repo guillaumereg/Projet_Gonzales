@@ -25,4 +25,9 @@ angular.module('changeProfilController', ['authServices','userServices']) //util
       });
     }
 
+    $scope.annulation = function(user) {
+        $location.path('/myProfil');
+    }
+
+
   });
