@@ -8,6 +8,10 @@ angular.module('evaluationService', [])
 			return $http.post('/api/evaluation', evaluationData); // Return data from end point to controller
 		};
 
+		evaluationFactory.removeEvaluation = function(evaluationId) {
+			return $http.post('/api/removeEvaluation', evaluationId); // Return data from end point to controller
+		};
+
 		evaluationFactory.getEvaluationByUsername = function(username) {
 			return $http.post('/api/myEvaluation', username); // Return data from end point to controller
 		};

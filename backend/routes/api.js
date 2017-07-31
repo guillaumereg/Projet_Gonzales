@@ -57,11 +57,11 @@ module.exports = function(router) {
                   res.json({ success: false, message: 'données ne sont pas complètes' });
         }
         else{
-            req.currentUser.age=req.body.age;
-            req.currentUser.phoneNumber=req.body.phoneNumber;
-            req.currentUser.country=req.body.country;
-            req.currentUser.city=req.body.city;
-            req.currentUser.save(function(err) { //sauver dans la base de données
+            req.body.currentUser.age=req.body.age;
+            req.body.currentUser.phoneNumber=req.body.phoneNumber;
+            req.body.currentUser.country=req.body.country;
+            req.body.currentUser.city=req.body.city;
+            req.body.currentUser.save(function(err) { //sauver dans la base de données
                 if (err) {
                     res.json({ success: false, message: 'Faute de format d entrée' });
                 } else {
@@ -150,6 +150,18 @@ module.exports = function(router) {
             }
             else{
                 res.json({ success: true, message: 'offer sent back to user' , evaluation: evaluation});
+            }
+        });
+    });
+
+    router.post('/removeEvaluation', function(req, res) { //envoie liste des offres de louage l'utilisateur
+        Evaluation.remove({ _id: req.body.evaluationId})
+        .exec(function(err,offers){
+            if(err){
+                res.json({ success: false, message: 'impossible de supprimer cette offre' });
+            }
+            else{
+                res.json({ success: true, message: 'offre supprimée' });
             }
         });
     });
