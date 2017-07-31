@@ -49,7 +49,7 @@ module.exports = function(router) {
     });
 
     router.post('/changeProfile', function(req, res) { //change les details d'un profil
-        var user = User.findOne({ username: req.body.username}).select('username age phoneNumber country city').exec(function(err,user){
+        User.findOne({ username: req.body.username}).select('username age phoneNumber country city').exec(function(err,user){
             if(err){
                 throw err;
             }
