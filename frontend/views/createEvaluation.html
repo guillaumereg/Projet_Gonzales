@@ -5,16 +5,16 @@
 <form ng-submit="createEvaluation()">
 
 	<label>Username : </label>
-	<input class="form-control" style="width: 300px" name="username" type="text" >
+	<input class="form-control" style="width: 300px" name="username" type="text" ng-model="evaluationData.username">
 	<br>
 
 	<label>Evaluation (/10) : </label>
-	<input class="form-control" style="width: 100px" name="eval"type="text" >
+	<input class="form-control" style="width: 100px" name="eval" type="text" ng-model="evaluationData.eval">
 	<br>
 
 	<label>Commentary : </label>
-	<input class="form-control" style="width: 400px"name="commentary" type="text" >
+	<input class="form-control" style="width: 400px"name="commentary" type="text" ng-model="evaluationData.commentary">
 	<br>
 
-	<button ng-click="createEval()" type= "button"> Save evaluation </button>
+	<button class= "btn btn-primary" type= "submit"> Save evaluation </button>
 </form>

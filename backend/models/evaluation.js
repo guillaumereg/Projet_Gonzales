@@ -1,7 +1,7 @@
 var mongoose = require( 'mongoose' );
 var Schema = mongoose.Schema;
 
-var OfferSchema = new mongoose.Schema({
+var EvaluationSchema = new mongoose.Schema({
   username: {
     type: String,
     unique: false

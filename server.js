@@ -9,6 +9,7 @@ var router = express.Router();
 
 var User = require('./backend/models/user.js');
 var Offer = require('./backend/models/offer.js');
+var Evaluation = require('./backend/models/evaluation.js');
 
 var appRoutes = require('./backend/routes/api.js')(router);
 

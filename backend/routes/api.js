@@ -1,5 +1,6 @@
 var User = require('../models/user');
 var Offer = require('../models/offer');
+var Evaluation = require('../models/evaluation');
 
 var jwt = require('jsonwebtoken');
 var secret = 'valarmorghulis';
@@ -49,12 +50,6 @@ module.exports = function(router) {
     });
 
     router.post('/changeProfile', function(req, res) { //change les details d'un profil
-        var currentUser;
-        currentUser= User.findOne({ username: req.body.username}).select('username').exec(function(err,user){
-            if(err){
-                throw err;
-            }
-        });
         if (req.body.age == null || req.body.age == ''
                || req.body.phoneNumber == null|| req.body.phoneNumber == ''
                || req.body.country == null || req.body.country == ''
@@ -62,11 +57,17 @@ module.exports = function(router) {
                   res.json({ success: false, message: 'données ne sont pas complètes' });
         }
         else{
-            currentUser.age=req.body.age;
-            currentUser.phoneNumber=req.body.phoneNumber;
-            currentUser.country=req.body.country;
-            currentUser.city=req.body.city;
-            res.json({ success: true, message: 'modifications de lutilisateur effectuée'});
+            req.currentUser.age=req.body.age;
+            req.currentUser.phoneNumber=req.body.phoneNumber;
+            req.currentUser.country=req.body.country;
+            req.currentUser.city=req.body.city;
+            req.currentUser.save(function(err) { //sauver dans la base de données
+                if (err) {
+                    res.json({ success: false, message: 'Faute de format d entrée' });
+                } else {
+                    res.json({ success: true, message: 'user modified!' }); //utilisateur a été sauvé, renvoyer réponse
+                }
+            });
         }
 
     });
@@ -131,17 +132,17 @@ module.exports = function(router) {
             evaluation.username = req.body.username;
             evaluation.eval = req.body.eval;
             evaluation.commentary= req.body.commentary;
-            offer.save(function(err) { //sauver dans la base de données
+            evaluation.save(function(err) { //sauver dans la base de données
                 if (err) {
                     res.json({ success: false, message: 'Faute de format d entrée' });
                 } else {
-                    res.json({ success: true, message: 'évaluation créée!' }); //utilisateur a été sauvé, renvoyer réponse
+                    res.json({ success: true, message: 'Evaluation créée!' }); //utilisateur a été sauvé, renvoyer réponse
                 }
             });
         }
     });
 
-    router.post('/myEvaluation', function(req, res) { //envoie liste des offres de louage l'utilisateur
+    router.post('/myEvaluation', function(req, res) {
         Evaluation.find({ username: req.body.username})
         .select('eval commentary').exec(function(err,evaluation){
             if(err){
@@ -154,7 +155,7 @@ module.exports = function(router) {
     });
 
 
-    router.post('/offer', function(req, res) { //enregistrer une offre de louage
+    router.post('/offer', function(req, res) { //enregistrer une offre de location
         if (req.body.username == null || req.body.username == ''
          || req.body.brand == null || req.body.brand == ''
          || req.body.model == null || req.body.model == ''
@@ -179,7 +180,7 @@ module.exports = function(router) {
 
 
 
-    router.post('/myOffers', function(req, res) { //envoie liste des offres de louage l'utilisateur
+    router.post('/myOffers', function(req, res) { //envoie liste des offres de location l'utilisateur
         Offer.find({ username: req.body.username})
         .select('brand model price').exec(function(err,offers){
             if(err){
