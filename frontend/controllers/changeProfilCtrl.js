@@ -15,7 +15,7 @@ angular.module('changeProfilController', ['authServices','userServices']) //util
     });
 
     $scope.saveChange = function(user) {
-      User.changeMyProfil({username: data.data.username})
+      User.changeMyProfil($scope.regData)
       .then(function(data){
           if (data.data.success) {  // rediriger vers la page de profil en cas de succes
               $location.path('/myProfil');

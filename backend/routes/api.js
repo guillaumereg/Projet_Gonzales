@@ -49,26 +49,26 @@ module.exports = function(router) {
     });
 
     router.post('/changeProfile', function(req, res) { //change les details d'un profil
-        User.findOne({ username: req.body.username}).select('username age phoneNumber country city').exec(function(err,user){
+        var currentUser;
+        currentUser= User.findOne({ username: req.body.username}).select('username').exec(function(err,user){
             if(err){
                 throw err;
             }
-            else {
-              if (req.body.age == null || req.body.age == ''
+        });
+        if (req.body.age == null || req.body.age == ''
                || req.body.phoneNumber == null|| req.body.phoneNumber == ''
                || req.body.country == null || req.body.country == ''
                || req.body.city == null || req.body.city == '') {
                   res.json({ success: false, message: 'données ne sont pas complètes' });
-              }
-              else{
-                user.age=req.body.age;
-                user.phoneNumber=req.body.phoneNumber;
-                user.country=req.body.country;
-                user.city=req.body.city;
-                res.json({ success: true, message: 'modifications de lutilisateur effectuée'});
-              }
-            }
-        });
+        }
+        else{
+            currentUser.age=req.body.age;
+            currentUser.phoneNumber=req.body.phoneNumber;
+            currentUser.country=req.body.country;
+            currentUser.city=req.body.city;
+            res.json({ success: true, message: 'modifications de lutilisateur effectuée'});
+        }
+
     });
 
     router.post('/login', function(req, res) { //login d'un utilisateur

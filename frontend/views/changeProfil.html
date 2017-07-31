@@ -5,22 +5,22 @@
 <form ng-submit="regUser()">
 
 	<br>
-	<label>Age: </label>
+	<label>Age : </label>
 	<input class="form-control" style="width: 300px" name="age" type="text"  ng-model="regData.age">
 	<br>
 
-	<label>Phone number: </label>
+	<label>Phone number : </label>
 	<input class="form-control" style="width: 300px" name="phoneNumber" type="text"  ng-model="regData.phoneNumber">
 	<br>
 
-	<label>Country: </label>
+	<label>Country : </label>
 	<input class="form-control" style="width: 300px" name="country" type="text" ng-model="regData.country">
 	<br>
 
-	<label>City: </label>
+	<label>City : </label>
 	<input class="form-control" style="width: 300px" name="city" type="text"  ng-model="regData.city">
 	<br>
 
-	<button  ng-click="saveChange(user)" type= "button"> Save change </button>
+	<button  class= "btn btn-primary" ng-click="saveChange(user)" type= "submit"> Save change </button>
 	<button  ng-click="annulation(user)" type= "button"> Cancel </button>
 </form>
