@@ -119,6 +119,41 @@ module.exports = function(router) {
         res.send(req.decoded);
     });
 
+
+    router.post('/evaluation', function(req, res) { //enregistrer une offre de louage
+        if (req.body.username == null || req.body.username == ''
+         || req.body.eval == null || req.body.eval == ''
+         || req.body.commentary == null || req.body.commentary == '') {
+            res.json({ success: false, message: 'données ne sont pas complètes' });
+        }
+        else {
+            var evaluation = new Evaluation();
+            evaluation.username = req.body.username;
+            evaluation.eval = req.body.eval;
+            evaluation.commentary= req.body.commentary;
+            offer.save(function(err) { //sauver dans la base de données
+                if (err) {
+                    res.json({ success: false, message: 'Faute de format d entrée' });
+                } else {
+                    res.json({ success: true, message: 'évaluation créée!' }); //utilisateur a été sauvé, renvoyer réponse
+                }
+            });
+        }
+    });
+
+    router.post('/myEvaluation', function(req, res) { //envoie liste des offres de louage l'utilisateur
+        Evaluation.find({ username: req.body.username})
+        .select('eval commentary').exec(function(err,evaluation){
+            if(err){
+                throw err;
+            }
+            else{
+                res.json({ success: true, message: 'offer sent back to user' , evaluation: evaluation});
+            }
+        });
+    });
+
+
     router.post('/offer', function(req, res) { //enregistrer une offre de louage
         if (req.body.username == null || req.body.username == ''
          || req.body.brand == null || req.body.brand == ''
@@ -141,6 +176,8 @@ module.exports = function(router) {
             });
         }
     });
+
+
 
     router.post('/myOffers', function(req, res) { //envoie liste des offres de louage l'utilisateur
         Offer.find({ username: req.body.username})

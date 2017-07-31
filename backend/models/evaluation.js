@@ -6,11 +6,11 @@ var OfferSchema = new mongoose.Schema({
     type: String,
     unique: false
   },
-  evaluation: {
+  eval: {
     type: Number,
     unique: false
   },
-  commentaire: {
+  commentary: {
   	type: String,
   	unique: false
   }

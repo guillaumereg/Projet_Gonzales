@@ -43,6 +43,11 @@ angular.module('appRoutes', ['ngRoute'])      //ng route to create route
                 controller: 'changeProfilCtrl'
 
             })
+            .when('/createEvaluation', {
+                templateUrl: 'views/createEvaluation.html' ,
+                controller: 'createEvaluationCtrl'
+
+            })
 
             .otherwise({
                 templateUrl: 'views/unknown.html'
