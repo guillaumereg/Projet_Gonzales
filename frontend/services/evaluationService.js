@@ -12,8 +12,12 @@ angular.module('evaluationService', [])
 			return $http.post('/api/removeEvaluation', evaluationId); // Return data from end point to controller
 		};
 
+		evaluationFactory.getEvaluationByAuthor = function(author) {
+			return $http.post('/api/evaluationByAuthor', author); // Return data from end point to controller
+		};
+
 		evaluationFactory.getEvaluationByUsername = function(username) {
-			return $http.post('/api/myEvaluation', username); // Return data from end point to controller
+			return $http.post('/api/evaluationByUsername', username); // Return data from end point to controller
 		};
 
 		return evaluationFactory;

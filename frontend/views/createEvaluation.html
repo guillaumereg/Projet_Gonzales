@@ -1,22 +1,24 @@
 <div class= "page-header">
 	<h1>Create an evaluation </h1>
-</div>
 
-<form ng-submit="createEvaluation()">
 
-	<label>Username : </label>
-	<input class="form-control" style="width: 300px" name="username" type="text" ng-model="evaluationData.username">
-	<br>
+	<form ng-submit="createEval()">
 
-	<label>Evaluation (/10) : </label>
-	<input class="form-control" style="width: 100px" name="eval" type="text" ng-model="evaluationData.eval">
-	<br>
+		<label>Username : </label>
+		<input class="form-control" style="width: 300px" name="username" type="text" ng-model="evaluationData.username">
+		<br>
 
-	<label>Commentary : </label>
-	<input class="form-control" style="width: 400px"name="commentary" type="text" ng-model="evaluationData.commentary">
-	<br>
+		<label>Evaluation (/10) : </label>
+		<input class="form-control" style="width: 100px" name="eval" type="text" ng-model="evaluationData.eval">
+		<br>
 
-	<button class= "btn btn-primary" type= "submit"> Save evaluation </button>
+		<label>Commentary : </label>
+		<input class="form-control" style="width: 400px" name="commentary" type="text" ng-model="evaluationData.commentary">
+		<br>
+
+		<button class= "btn btn-primary" type= "submit"> Save evaluation </button>
+
+	</form>
 
 	<br>
   <h3> Previous evaluation : </h3>
@@ -31,12 +33,12 @@
 
 		<tr ng-repeat="evaluation in evaluations">
 			<td>{{evaluation.username}}</td>
-			<td>{{evaluation.username}}</td>
-			<td>{{evaluation.username}}</td>
+			<td>{{evaluation.eval}}</td>
+			<td>{{evaluation.commentary}}</td>
 			<td>
 				 <button ng-click="deleteEvaluation(evaluation)" type="button" class="btn btn-danger">Delete evaluation</button>
 			</td>
 		</tr>
 	</table>
 
-</form>
+</div>

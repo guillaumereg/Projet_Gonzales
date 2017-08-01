@@ -3,8 +3,10 @@ angular.module('createEvaluationController', ['evaluationService','authServices'
     .controller('createEvaluationCtrl', function($location, Evaluation, Auth, $route, $scope) {   //add factory User !!!! pour utiliser ce factory du module  userservices
 
         $scope.createEval = function() {
+          Auth.getUser().then(function(data){
+            var username = data.data.username;
             Evaluation.create({username: $scope.evaluationData.username, eval: $scope.evaluationData.eval,
-                          commentary: $scope.evaluationData.commentary,})
+                          commentary: $scope.evaluationData.commentary, author: data.data.username})
                           .then(function(data){
                 if (data.data.success) {  // rediriger vers la page de login en cas de succes
                     $location.path('/home');
@@ -12,10 +14,11 @@ angular.module('createEvaluationController', ['evaluationService','authServices'
                     console.log(data.data.message);
                 }
             });
+          });
         };
 
         Auth.getUser().then(function(data){
-            Evaluation.getEvaluationByUsername({username: data.data.username}) //get all offers from user from database
+            Evaluation.getEvaluationByAuthor({author: data.data.author}) //get all evaluations from user from database
             .then(function(data){
                 if (data.data.success) {
                     $scope.evaluations = data.data.evaluations;

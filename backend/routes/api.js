@@ -121,10 +121,11 @@ module.exports = function(router) {
     });
 
 
-    router.post('/evaluation', function(req, res) { //enregistrer une offre de louage
+    router.post('/evaluation', function(req, res) { //enregistrer une evaluation
         if (req.body.username == null || req.body.username == ''
          || req.body.eval == null || req.body.eval == ''
-         || req.body.commentary == null || req.body.commentary == '') {
+         || req.body.commentary == null || req.body.commentary == ''
+         || req.body.author == null || req.body.author == '') {
             res.json({ success: false, message: 'données ne sont pas complètes' });
         }
         else {
@@ -132,6 +133,7 @@ module.exports = function(router) {
             evaluation.username = req.body.username;
             evaluation.eval = req.body.eval;
             evaluation.commentary= req.body.commentary;
+            evaluation.author=req.body.author;
             evaluation.save(function(err) { //sauver dans la base de données
                 if (err) {
                     res.json({ success: false, message: 'Faute de format d entrée' });
@@ -142,14 +144,26 @@ module.exports = function(router) {
         }
     });
 
-    router.post('/myEvaluation', function(req, res) {
-        Evaluation.find({ username: req.body.username})
-        .select('eval commentary').exec(function(err,evaluation){
+    router.post('/evaluationByAuthor', function(req, res) {
+        Evaluation.find({ author: req.body.author})
+        .select('username eval commentary').exec(function(err,evaluation){
             if(err){
                 throw err;
             }
             else{
-                res.json({ success: true, message: 'offer sent back to user' , evaluation: evaluation});
+                res.json({ success: true, message: 'evaluation sent back to user' , evaluation: evaluation});
+            }
+        });
+    });
+
+    router.post('/evaluationByUsername', function(req, res) {
+        Evaluation.find({ username: req.body.username})
+        .select('author eval commentary').exec(function(err,evaluation){
+            if(err){
+                throw err;
+            }
+            else{
+                res.json({ success: true, message: 'evaluation sent back to user' , evaluation: evaluation});
             }
         });
     });

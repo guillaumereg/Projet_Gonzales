@@ -1,24 +1,42 @@
 <div class= "page-header">
 	<h3> {{user.username}} </h3>
-</div>
 
-<table class="table">
-  <tr>
-    <td> <strong> Username : {{user.username}} </strong> </td>
-		<tr></tr>
-    <td> <strong> Age : {{user.age}} </strong> </td>
-		<tr></tr>
-    <td> <strong> Phone number : {{user.phoneNumber}} </strong> </td>
-		<tr></tr>
-    <td> <strong> Country : {{user.country}} </strong> </td>
-		<tr></tr>
-    <td> <strong> City : {{user.city}} </strong> </td>
-		<tr></tr>
-		<td>
-			 <button ng-click="changeProfil(user)" type="button" > Change profil </button>
-		</td>
-  </tr>
 
-</table>
+	<table class="table">
+	  <tr>
+	    <td> <strong> Username : {{user.username}} </strong> </td>
+			<tr></tr>
+	    <td> <strong> Age : {{user.age}} </strong> </td>
+			<tr></tr>
+	    <td> <strong> Phone number : {{user.phoneNumber}} </strong> </td>
+			<tr></tr>
+	    <td> <strong> Country : {{user.country}} </strong> </td>
+			<tr></tr>
+	    <td> <strong> City : {{user.city}} </strong> </td>
+			<tr></tr>
+			<td>
+				 <button ng-click="changeProfil(user)" type="button" > Change profil </button>
+			</td>
+	  </tr>
+
+	</table>
+
+	<br>
+  <h3> Evaluation about {{user.username}} </h3>
+	<br>
+
+	<table class="table">
+		<tr>
+			<td> <strong> Author : </strong> </td>
+			<td> <strong> Evaluation (/10) : </strong> </td>
+			<td> <strong> Commentary : </strong> </td>
+		</tr>
+
+		<tr ng-repeat="evaluation in evaluations">
+			<td>{{evaluation.author}}</td>
+			<td>{{evaluation.eval}}</td>
+			<td>{{evaluation.commentary}}</td>
+		</tr>
+	</table>
 
 </div>

@@ -13,6 +13,10 @@ var EvaluationSchema = new mongoose.Schema({
   commentary: {
   	type: String,
   	unique: false
+  },
+  author: {
+  	type: String,
+  	unique: false
   }
 });
 
