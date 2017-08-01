@@ -3,9 +3,11 @@ angular.module('createEvaluationController', ['evaluationService','authServices'
     .controller('createEvaluationCtrl', function($location, Evaluation, Auth, $route, $scope) {   //add factory User !!!! pour utiliser ce factory du module  userservices
 
         $scope.createEval = function() {
+            console.log('succes brah');
             Evaluation.create({username: $scope.evaluationData.username, eval: $scope.evaluationData.eval,
                           commentary: $scope.evaluationData.commentary,})
                           .then(function(data){
+                            console.log(data.data);
                 if (data.data.success) {  // rediriger vers la page de login en cas de succes
                     $location.path('/home');
                 } else {
