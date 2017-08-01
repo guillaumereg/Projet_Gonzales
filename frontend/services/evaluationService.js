@@ -1,8 +1,8 @@
 angular.module('evaluationService', [])
 
-	.factory('Evaluation', function($http) {   //offer = nom de notre factory
+	.factory('Evaluation', function($http) {   //Evaluation = nom de notre factory
 
-		var evaluationFactory = {}; // Create the offer object
+		var evaluationFactory = {}; // Create the evaluation object
 
 		evaluationFactory.create = function(evaluationData) {
 			return $http.post('/api/evaluation', evaluationData); // Return data from end point to controller

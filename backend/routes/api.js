@@ -57,11 +57,12 @@ module.exports = function(router) {
                   res.json({ success: false, message: 'données ne sont pas complètes' });
         }
         else{
-            req.body.currentUser.age=req.body.age;
-            req.body.currentUser.phoneNumber=req.body.phoneNumber;
-            req.body.currentUser.country=req.body.country;
-            req.body.currentUser.city=req.body.city;
-            req.body.currentUser.save(function(err) { //sauver dans la base de données
+            var currentUser ; //fonction pour extraire l'utilisateur correspondant au nom
+            currentUser.age=req.body.age;
+            currentUser.phoneNumber=req.body.phoneNumber;
+            currentUser.country=req.body.country;
+            currentUser.city=req.body.city;
+            currentUser.save(function(err) { //sauver dans la base de données
                 if (err) {
                     res.json({ success: false, message: 'Faute de format d entrée' });
                 } else {
@@ -146,36 +147,36 @@ module.exports = function(router) {
 
     router.post('/evaluationByAuthor', function(req, res) {
         Evaluation.find({ author: req.body.author})
-        .select('username eval commentary').exec(function(err,evaluation){
+        .select('username eval commentary').exec(function(err,evaluations){
             if(err){
                 throw err;
             }
             else{
-                res.json({ success: true, message: 'evaluation sent back to user' , evaluation: evaluation});
+                res.json({ success: true, message: 'evaluation sent back to user' , evaluations: evaluations});
             }
         });
     });
 
     router.post('/evaluationByUsername', function(req, res) {
         Evaluation.find({ username: req.body.username})
-        .select('author eval commentary').exec(function(err,evaluation){
+        .select('author eval commentary').exec(function(err,evaluations){
             if(err){
                 throw err;
             }
             else{
-                res.json({ success: true, message: 'evaluation sent back to user' , evaluation: evaluation});
+                res.json({ success: true, message: 'evaluation sent back to user' , evaluations: evaluations});
             }
         });
     });
 
     router.post('/removeEvaluation', function(req, res) { //envoie liste des offres de louage l'utilisateur
         Evaluation.remove({ _id: req.body.evaluationId})
-        .exec(function(err,offers){
+        .exec(function(err,evaluations){
             if(err){
-                res.json({ success: false, message: 'impossible de supprimer cette offre' });
+                res.json({ success: false, message: 'impossible de supprimer cette évaluation' });
             }
             else{
-                res.json({ success: true, message: 'offre supprimée' });
+                res.json({ success: true, message: 'évaluation supprimée' });
             }
         });
     });

@@ -1,27 +1,28 @@
 
 <div class= "page-header">
 	<h1> {{user.username}} profil </h1>
+
+
+	<form ng-submit="saveChange()">
+
+		<br>
+		<label>Age : </label>
+		<input class="form-control" style="width: 300px" name="age" type="text"  ng-model="regData.age">
+		<br>
+
+		<label>Phone number : </label>
+		<input class="form-control" style="width: 300px" name="phoneNumber" type="text"  ng-model="regData.phoneNumber">
+		<br>
+
+		<label>Country : </label>
+		<input class="form-control" style="width: 300px" name="country" type="text" ng-model="regData.country">
+		<br>
+
+		<label>City : </label>
+		<input class="form-control" style="width: 300px" name="city" type="text"  ng-model="regData.city">
+		<br>
+
+		<button  class= "btn btn-primary" type= "submit"> Save change </button>
+		<button  ng-click="annulation()" type= "button"> Cancel </button>
+	</form>
 </div>
-
-<form ng-submit="regUser()">
-
-	<br>
-	<label>Age : </label>
-	<input class="form-control" style="width: 300px" name="age" type="text"  ng-model="regData.age">
-	<br>
-
-	<label>Phone number : </label>
-	<input class="form-control" style="width: 300px" name="phoneNumber" type="text"  ng-model="regData.phoneNumber">
-	<br>
-
-	<label>Country : </label>
-	<input class="form-control" style="width: 300px" name="country" type="text" ng-model="regData.country">
-	<br>
-
-	<label>City : </label>
-	<input class="form-control" style="width: 300px" name="city" type="text"  ng-model="regData.city">
-	<br>
-
-	<button  class= "btn btn-primary" ng-click="saveChange()" type= "submit"> Save change </button>
-	<button  ng-click="annulation()" type= "button"> Cancel </button>
-</form>

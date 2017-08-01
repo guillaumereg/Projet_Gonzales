@@ -4,11 +4,11 @@ angular.module('createEvaluationController', ['evaluationService','authServices'
 
         $scope.createEval = function() {
           Auth.getUser().then(function(data){
-            var username = data.data.username;
+            var author = data.data.username;
             Evaluation.create({username: $scope.evaluationData.username, eval: $scope.evaluationData.eval,
                           commentary: $scope.evaluationData.commentary, author: data.data.username})
                           .then(function(data){
-                if (data.data.success) {  // rediriger vers la page de login en cas de succes
+                if (data.data.success) {  // rediriger vers la page home en cas de succes
                     $location.path('/home');
                 } else {
                     console.log(data.data.message);
@@ -18,7 +18,7 @@ angular.module('createEvaluationController', ['evaluationService','authServices'
         };
 
         Auth.getUser().then(function(data){
-            Evaluation.getEvaluationByAuthor({author: data.data.author}) //get all evaluations from user from database
+            Evaluation.getEvaluationByAuthor({author: data.data.username}) //get all evaluations from user from database
             .then(function(data){
                 if (data.data.success) {
                     $scope.evaluations = data.data.evaluations;
@@ -31,7 +31,7 @@ angular.module('createEvaluationController', ['evaluationService','authServices'
         $scope.deleteEvaluation = function(evaluation) {
             Evaluation.removeEvaluation({evaluationId: $scope.evaluations[ $scope.evaluations.indexOf(evaluation) ]._id})
             .then(function(data){
-                $scope.evaluation.splice($scope.evaluation.indexOf(evaluation),1);
+                $scope.evaluations.splice($scope.evaluations.indexOf(evaluation),1);
                 if (!data.data.success) {
                     console.log(data.data.message);
                 }
