@@ -39,6 +39,7 @@ angular.module('searchOffersController', ['offerServices', 'authServices','evalu
             $scope.profile={};
             $scope.evaluations={};
             $scope.showEvaluation=false;
+            $scope.showResults=false;
             currentUser=username;
             User.getUserByUsername({username: username}).then(function(data){
                 if (data.data.success) {
