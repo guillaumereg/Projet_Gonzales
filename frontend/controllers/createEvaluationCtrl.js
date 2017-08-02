@@ -8,7 +8,8 @@ angular.module('createEvaluationController', ['evaluationService','authServices'
             Evaluation.create({username: $scope.evaluationData.username, eval: $scope.evaluationData.eval,
                           commentary: $scope.evaluationData.commentary, author: data.data.username})
                           .then(function(data){
-                if (data.data.success) {  // rediriger vers la page home en cas de succes
+
+                if (data.data.success) {  // rediriger vers la page de login en cas de succes
                     $location.path('/home');
                 } else {
                     console.log(data.data.message);
