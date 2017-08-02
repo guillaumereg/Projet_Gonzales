@@ -1,15 +1,20 @@
-angular.module('searchOffersController', ['offerServices', 'authServices']) //utiliser module userServices entre [] de app.js
+angular.module('searchOffersController', ['offerServices', 'authServices','evaluationService']) //utiliser module userServices entre [] de app.js
 //ajouter nouveau module crée (userControllers) entre [] de app.js pour pouvoir l'utiliser dans d'autres modules
-    .controller('searchOffersCtrl', function($location, Offer, Auth, $route, $scope, User) {   //add factory User !!!! pour utiliser ce factory du module  userservices
+    .controller('searchOffersCtrl', function($location, Offer, Auth, $route, $scope, User, Evaluation) {   //add factory User !!!! pour utiliser ce factory du module  userservices
 
+        var currentUser;
         $scope.showResults=false;
         $scope.showProfile=false;
+        $scope.showEvaluation=false;
         $scope.profile={};
+        $scope.evaluations={};
         $scope.results={};
         $scope.findOffers = function() {
             $scope.results={};
             $scope.profile={};
+            $scope.evaluations={};
             $scope.showProfile=false;
+            $scope.showEvaluation=false;
             if($scope.searchData === undefined || $scope.searchData === null){  // l'utilisateur n'a rien spécifié
                 $scope.searchData=null;
             }
@@ -32,7 +37,10 @@ angular.module('searchOffersController', ['offerServices', 'authServices']) //ut
         };
         $scope.goToProfile = function(username){
             $scope.profile={};
-            User.getUserByUsername({username: username}).then(function(data){    
+            $scope.evaluations={};
+            $scope.showEvaluation=false;
+            currentUser=username;
+            User.getUserByUsername({username: username}).then(function(data){
                 if (data.data.success) {
                     $scope.showProfile=true;
                     $scope.profile=data.data.user;
@@ -43,5 +51,19 @@ angular.module('searchOffersController', ['offerServices', 'authServices']) //ut
                 }
             });
         }
-        
+        $scope.goToEval = function(){
+            $scope.evaluations={};
+            Evaluation.getEvaluationByUsername({username: currentUser})
+            .then(function(data){
+                if (data.data.success) {
+                    $scope.showEvaluation=true;
+                    $scope.evaluations=data.data.evaluations;
+
+                }
+                else{
+                    console.log(data.data.message);
+                }
+            });
+        }
+
     });
