@@ -9,6 +9,10 @@
 		<input class="form-control" style="width: 300px" name="model" type="text" ng-model="searchData.model">
 		<br>
 
+		<label>City: </label>
+		<input class="form-control" style="width: 300px" name="city" type="text" ng-model="searchData.city">
+		<br>
+
 		<button class= "btn btn-primary" type= "submit"> Search </button>
 	</form>
 
@@ -18,6 +22,8 @@
 			<td> <strong> Brand </strong> </td>
 			<td> <strong> Model </strong> </td>
 			<td> <strong> € Per day </strong> </td>
+			<td> <strong> € City </strong> </td>
+			<td> <strong> Select? </strong> </td>
 		</tr>
 
 		<tr ng-repeat="result in results">
@@ -25,6 +31,10 @@
 			<td>{{result.brand}}</td>
 			<td>{{result.model}}</td>
 			<td>{{result.price}}</td>
+			<td>{{result.city}}</td>
+			<td>
+			 <button ng-click="selectOffer()" type="button" > select </button>
+			</td>
 		</tr>
 	</table>
 

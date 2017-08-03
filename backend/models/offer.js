@@ -17,6 +17,14 @@ var OfferSchema = new mongoose.Schema({
   price: {
     type: Number,
     unique: false
+  },
+  city: {
+    type: String,
+    unique: false
+  },
+  usernameSelect: {
+    type: String,
+    unique: false
   }
 });
 

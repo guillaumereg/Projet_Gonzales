@@ -25,6 +25,9 @@ angular.module('searchOffersController', ['offerServices', 'authServices','evalu
                 if($scope.searchData.model ===""){ //modèle non spécifié
                     delete $scope.searchData.model;
                 }
+                if($scope.searchData.city ===""){ //modèle non spécifié
+                    delete $scope.searchData.city;
+                }
             }
             Offer.searchOffers($scope.searchData).then(function(data){
                 if (data.data.success) {  // rediriger vers la page de login en cas de succes

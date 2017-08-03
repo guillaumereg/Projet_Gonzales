@@ -186,7 +186,8 @@ module.exports = function(router) {
         if (req.body.username == null || req.body.username == ''
          || req.body.brand == null || req.body.brand == ''
          || req.body.model == null || req.body.model == ''
-         || req.body.price == null|| req.body.price == '' ) {
+         || req.body.price == null|| req.body.price == ''
+         || req.body.city == null|| req.body.city == '' ) {
             res.json({ success: false, message: 'données ne sont pas complètes' });
         }
         else {
@@ -195,6 +196,7 @@ module.exports = function(router) {
             offer.brand = req.body.brand;
             offer.model = req.body.model;
             offer.price = req.body.price;
+            offer.city = req.body.city;
             offer.save(function(err) { //sauver dans la base de données
                 if (err) {
                     res.json({ success: false, message: 'Faute de format d entrée' });
@@ -209,7 +211,19 @@ module.exports = function(router) {
 
     router.post('/myOffers', function(req, res) { //envoie liste des offres de location l'utilisateur
         Offer.find({ username: req.body.username})
-        .select('brand model price').exec(function(err,offers){
+        .select('brand model price city').exec(function(err,offers){
+            if(err){
+                throw err;
+            }
+            else{
+                res.json({ success: true, message: 'offer sent back to user' , offers: offers});
+            }
+        });
+    });
+
+    router.post('/yourOffers', function(req, res) { //envoie liste des offres de location l'utilisateur
+        Offer.find({ usernameSelect: req.body.username})
+        .select('username brand model price city').exec(function(err,offers){
             if(err){
                 throw err;
             }
@@ -236,7 +250,7 @@ module.exports = function(router) {
     router.post('/searchOffer', function(req, res) { //envoie liste des offres de location d'autres utilisateurs
         console.log(req.body);
         Offer.find(req.body)
-        .select('username brand model price').exec(function(err,offers){
+        .select('username brand model price city').exec(function(err,offers){
             if(err){
                 console.log(err);
                 res.json({ success: false, message: 'impossible de chercher des offres' });
