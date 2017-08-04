@@ -49,29 +49,30 @@ module.exports = function(router) {
         });
     });
 
-    router.post('/changeProfile', function(req, res) { //change les details d'un profil
-        if (req.body.age == null || req.body.age == ''
-               || req.body.phoneNumber == null|| req.body.phoneNumber == ''
-               || req.body.country == null || req.body.country == ''
-               || req.body.city == null || req.body.city == '') {
-                  res.json({ success: false, message: 'données ne sont pas complètes' });
-        }
-        else{
-            var currentUser ; //fonction pour extraire l'utilisateur correspondant au nom
-            currentUser.age=req.body.age;
-            currentUser.phoneNumber=req.body.phoneNumber;
-            currentUser.country=req.body.country;
-            currentUser.city=req.body.city;
-            currentUser.save(function(err) { //sauver dans la base de données
-                if (err) {
-                    res.json({ success: false, message: 'Faute de format d entrée' });
-                } else {
-                    res.json({ success: true, message: 'user modified!' }); //utilisateur a été sauvé, renvoyer réponse
-                }
-            });
-        }
+     router.post('/changeProfile', function(req, res) { //change les details d'un profil
 
-    });
+         if (req.body.age == null || req.body.age == ''
+                || req.body.phoneNumber == null|| req.body.phoneNumber == ''
+                || req.body.country == null || req.body.country == ''
+                || req.body.city == null || req.body.city == '') {
+                   res.json({ success: false, message: 'données ne sont pas complètes' });
+         }
+         else{
+             var currentUser = User.find({username: req.body.username}); //fonction pour extraire l'utilisateur correspondant au nom
+             currentUser.age=req.body.age;
+             currentUser.phoneNumber=req.body.phoneNumber;
+             currentUser.country=req.body.country;
+             currentUser.city=req.body.city;
+             currentUser.save(function(err) { //sauver dans la base de données
+                 if (err) {
+                     res.json({ success: false, message: 'Faute de format d entrée' });
+                 } else {
+                     res.json({ success: true, message: 'user modified!' }); //utilisateur a été sauvé, renvoyer réponse
+                 }
+             });
+         }
+     });
+
 
     router.post('/login', function(req, res) { //login d'un utilisateur
         if (req.body.username == null || req.body.username == '' || req.body.password == null || req.body.password == ''){
@@ -246,10 +247,24 @@ module.exports = function(router) {
         });
     });
 
+    router.post('/selectOffer', function(req, res) { //envoie liste des offres de louage l'utilisateur
+        Offer.change({ _id: req.body.offerId})
+        .exec(function(err,offers){
+            if(err){
+                res.json({ success: false, message: 'impossible de sélectionner cette offre' });
+            }
+            else{
+                _id.usernameSelect= req.body.username;
+                res.json({ success: true, message: 'offre selectionnée' });
+            }
+        });
+    });
+
+
 
     router.post('/searchOffer', function(req, res) { //envoie liste des offres de location d'autres utilisateurs
         console.log(req.body);
-        Offer.find(req.body)
+        Offer.find(req.body && {usernameSelect: null} )
         .select('username brand model price city').exec(function(err,offers){
             if(err){
                 console.log(err);

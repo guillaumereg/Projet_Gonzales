@@ -69,5 +69,14 @@ angular.module('searchOffersController', ['offerServices', 'authServices','evalu
                 }
             });
         }
+        $scope.selectOffer = function(offer,username) {
+            Offer.selectMyOffer({offerId: $scope.offers[ $scope.offers.indexOf(offer) ]._id} ,username)
+            .then(function(data){
+                $scope.offers.splice($scope.offers.indexOf(offer),1);
+                if (!data.data.success) {
+                    console.log(data.data.message);
+                }
+            });
+        }
 
     });
