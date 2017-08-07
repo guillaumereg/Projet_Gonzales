@@ -22,7 +22,7 @@
 	</table>
 
 	<br>
-	<h3> Offers that you selected </h3>
+	<h3> Offers that you have selected </h3>
 	<br>
 
 		<table class="table">
@@ -32,6 +32,7 @@
 				<td> <strong> Model : </strong> </td>
 				<td> <strong> Price per day : </strong> </td>
 				<td> <strong> City : </strong> </td>
+				<td> <strong> Delete </strong> </td>
 			</tr>
 
 			<tr ng-repeat="offer in offers">
@@ -40,6 +41,9 @@
 				<td>{{offer.model}}</td>
 				<td>{{offer.price}}</td>
 				<td>{{offer.city}}</td>
+				<td>
+					 <button ng-click="deleteOffer(offer)" type="button" class="btn btn-danger">Delete offer</button>
+				</td>
 			</tr>
 		</table>
 

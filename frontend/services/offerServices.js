@@ -19,9 +19,12 @@ angular.module('offerServices', [])
 		offerFactory.removeOffer = function(offerId) {
 			return $http.post('/api/removeOffer', offerId); // Return data from end point to controller
 		};
+		offerFactory.unselectOffer = function(offerId) {
+			return $http.post('/api/unselectOffer', offerId); // Return data from end point to controller
+		};
 
 		offerFactory.selectMyOffer = function(offerId,username) {
-			return $http.post('/api/selectOffer', offerId,username); // Return data from end point to controller
+			return $http.post('/api/selectOffer',offerId,username); // Return data from end point to controller
 		};
 
 		offerFactory.searchOffers = function(searchData) {

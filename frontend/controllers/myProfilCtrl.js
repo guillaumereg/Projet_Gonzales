@@ -28,10 +28,10 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
     });
 
     Auth.getUser().then(function(data){
-      Offer.getEvaluationByUsernameSelect({username: data.data.username}) //get all evaluations from user from database
+      Offer.getOffersByUsernameSelect({username: data.data.username}) //get all evaluations from user from database
         .then(function(data){
             if (data.data.success) {
-                $scope.evaluations = data.data.evaluations;
+                $scope.offers = data.data.offers;
             } else {
                 console.log(data.data.message);
             }
@@ -45,6 +45,15 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
                 $scope.profile=data.data.user;
             }
             else{
+                console.log(data.data.message);
+            }
+        });
+    }
+    $scope.deleteOffer = function(offer) {
+        Offer.unselectOffer({offerId: $scope.offers[ $scope.offers.indexOf(offer) ]._id})
+        .then(function(data){
+            $scope.offers.splice($scope.offers.indexOf(offer),1);
+            if (!data.data.success) {
                 console.log(data.data.message);
             }
         });

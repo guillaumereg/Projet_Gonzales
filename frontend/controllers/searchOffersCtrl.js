@@ -69,14 +69,18 @@ angular.module('searchOffersController', ['offerServices', 'authServices','evalu
                 }
             });
         }
-        $scope.selectOffer = function(offer,username) {
-            Offer.selectMyOffer({offerId: $scope.offers[ $scope.offers.indexOf(offer) ]._id} ,username)
+        $scope.selectOffer = function(result) {
+          Auth.getUser().then(function(data){
+            Offer.selectMyOffer({offerId: $scope.results[ $scope.results.indexOf(result) ]._id},{username: data.data.username} )
             .then(function(data){
-                $scope.offers.splice($scope.offers.indexOf(offer),1);
+                $scope.results.splice($scope.results.indexOf(result),1);
                 if (!data.data.success) {
                     console.log(data.data.message);
+                }else{
+                  $location.path('/myProfil');
                 }
             });
+          });
         }
 
     });

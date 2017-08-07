@@ -50,7 +50,6 @@ module.exports = function(router) {
     });
 
      router.post('/changeProfile', function(req, res) { //change les details d'un profil
-
          if (req.body.age == null || req.body.age == ''
                 || req.body.phoneNumber == null|| req.body.phoneNumber == ''
                 || req.body.country == null || req.body.country == ''
@@ -58,18 +57,28 @@ module.exports = function(router) {
                    res.json({ success: false, message: 'données ne sont pas complètes' });
          }
          else{
-             var currentUser = User.find({username: req.body.username}); //fonction pour extraire l'utilisateur correspondant au nom
-             currentUser.age=req.body.age;
-             currentUser.phoneNumber=req.body.phoneNumber;
-             currentUser.country=req.body.country;
-             currentUser.city=req.body.city;
-             currentUser.save(function(err) { //sauver dans la base de données
-                 if (err) {
-                     res.json({ success: false, message: 'Faute de format d entrée' });
-                 } else {
-                     res.json({ success: true, message: 'user modified!' }); //utilisateur a été sauvé, renvoyer réponse
-                 }
-             });
+           User.findOne({ username: req.body.username})
+           .select().exec(function(err,user){
+               if(err){
+                   throw err;
+               }
+               if(!user){
+                   res.json({success: false, message: 'aucun utilisateur existe avec cet identifiant' });
+               }
+               else if(user){            //= mot de passe soumis
+                 user.age=req.body.age;
+                 user.phoneNumber=req.body.phoneNumber;
+                 user.country=req.body.country;
+                 user.city=req.body.city;
+                 user.save(function(err) { //sauver dans la base de données
+                     if (err) {
+                         res.json({ success: false, message: 'Cet identifiant existe déja ou faute de format d entrée' });
+                     } else {
+                         res.json({ success: true, message: 'user modified!' }); //utilisateur a été sauvé, renvoyer réponse
+                     }
+                 });
+               }
+           });
          }
      });
 
@@ -235,7 +244,7 @@ module.exports = function(router) {
     });
 
 
-    router.post('/removeOffer', function(req, res) { //envoie liste des offres de louage l'utilisateur
+    router.post('/removeOffer', function(req, res) { //envoie liste des offres de location de l'utilisateur
         Offer.remove({ _id: req.body.offerId})
         .exec(function(err,offers){
             if(err){
@@ -247,24 +256,50 @@ module.exports = function(router) {
         });
     });
 
-    router.post('/selectOffer', function(req, res) { //envoie liste des offres de louage l'utilisateur
-        Offer.change({ _id: req.body.offerId})
-        .exec(function(err,offers){
-            if(err){
-                res.json({ success: false, message: 'impossible de sélectionner cette offre' });
-            }
-            else{
-                _id.usernameSelect= req.body.username;
-                res.json({ success: true, message: 'offre selectionnée' });
-            }
-        });
+    router.post('/selectOffer', function(req, res) {
+      Offer.findOne({ _id: req.body.offerId}).select()
+      .exec(function(err,offer){
+          if(err){
+              res.json({ success: false, message: 'impossible de supprimer cette offre' });
+          }
+          else{
+              offer.usernameSelect=req.body.username;
+              offer.save(function(err) { //sauver dans la base de données
+                  if (err) {
+                      res.json({ success: false, message: 'Faute de format d entrée' });
+                  } else {
+                      res.json({ success: true, message: 'offre modifiée!' });
+                  }
+              });
+          }
+      });
     });
+
+    router.post('/unselectOffer', function(req, res) {
+      Offer.findOne({ _id: req.body.offerId}).select()
+      .exec(function(err,offer){
+          if(err){
+              res.json({ success: false, message: 'impossible de supprimer cette offre' });
+          }
+          else{
+              offer.usernameSelect="";
+              offer.save(function(err) { //sauver dans la base de données
+                  if (err) {
+                      res.json({ success: false, message: 'Faute de format d entrée' });
+                  } else {
+                      res.json({ success: true, message: 'offre modifiée!' });
+                  }
+              });
+          }
+      });
+    });
+
 
 
 
     router.post('/searchOffer', function(req, res) { //envoie liste des offres de location d'autres utilisateurs
         console.log(req.body);
-        Offer.find(req.body && {usernameSelect: null} )
+        Offer.find(req.body)
         .select('username brand model price city').exec(function(err,offers){
             if(err){
                 console.log(err);
