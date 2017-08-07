@@ -1,6 +1,6 @@
 angular.module('myProfilController', ['evaluationService','authServices','userServices','offerServices']) //utiliser module userServices entre [] de app.js
 //ajouter nouveau module crée (userControllers) entre [] de app.js pour pouvoir l'utiliser dans d'autres modules
-  .controller('myProfilCtrl', function($location, Evaluation, User, Auth,Offer, $route, $scope) {   //add factory User !!!! pour utiliser ce factory du module  userservices
+  .controller('myProfilCtrl', function($location, Evaluation, User, Auth, Offer, $route, $scope) {   //add factory User !!!! pour utiliser ce factory du module  userservices
 
 
     $scope.showProfile=false;
@@ -28,8 +28,10 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
     });
 
     Auth.getUser().then(function(data){
-      Offer.getOffersByUsernameSelect({username: data.data.username}) //get all evaluations from user from database
+      Offer.getOffersByUsernameSelect({username: data.data.username}) //get all offers from user from database
         .then(function(data){
+            $scope.profile={};
+            $scope.showProfile=false;
             if (data.data.success) {
                 $scope.offers = data.data.offers;
             } else {

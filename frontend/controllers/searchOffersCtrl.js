@@ -73,7 +73,6 @@ angular.module('searchOffersController', ['offerServices', 'authServices','evalu
           Auth.getUser().then(function(data){
             Offer.selectMyOffer({offerId: $scope.results[ $scope.results.indexOf(result) ]._id},{username: data.data.username} )
             .then(function(data){
-                $scope.results.splice($scope.results.indexOf(result),1);
                 if (!data.data.success) {
                     console.log(data.data.message);
                 }else{

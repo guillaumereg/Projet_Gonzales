@@ -244,7 +244,7 @@ module.exports = function(router) {
     });
 
 
-    router.post('/removeOffer', function(req, res) { //envoie liste des offres de location de l'utilisateur
+    router.post('/removeOffer', function(req, res) {
         Offer.remove({ _id: req.body.offerId})
         .exec(function(err,offers){
             if(err){
@@ -258,13 +258,13 @@ module.exports = function(router) {
 
     router.post('/selectOffer', function(req, res) {
       Offer.findOne({ _id: req.body.offerId}).select()
-      .exec(function(err,offer){
+      .exec(function(err,offers){
           if(err){
               res.json({ success: false, message: 'impossible de supprimer cette offre' });
           }
           else{
-              offer.usernameSelect=req.body.username;
-              offer.save(function(err) { //sauver dans la base de données
+              offers.usernameSelect=req.body.username;
+              offers.save(function(err) { //sauver dans la base de données
                   if (err) {
                       res.json({ success: false, message: 'Faute de format d entrée' });
                   } else {
@@ -277,13 +277,13 @@ module.exports = function(router) {
 
     router.post('/unselectOffer', function(req, res) {
       Offer.findOne({ _id: req.body.offerId}).select()
-      .exec(function(err,offer){
+      .exec(function(err,offers){
           if(err){
               res.json({ success: false, message: 'impossible de supprimer cette offre' });
           }
           else{
-              offer.usernameSelect="";
-              offer.save(function(err) { //sauver dans la base de données
+              offers.usernameSelect="";
+              offers.save(function(err) { //sauver dans la base de données
                   if (err) {
                       res.json({ success: false, message: 'Faute de format d entrée' });
                   } else {
