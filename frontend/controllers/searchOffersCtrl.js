@@ -71,7 +71,7 @@ angular.module('searchOffersController', ['offerServices', 'authServices','evalu
         }
         $scope.selectOffer = function(result) {
           Auth.getUser().then(function(data){
-            Offer.selectMyOffer({offerId: $scope.results[ $scope.results.indexOf(result) ]._id},{username: data.data.username} )
+            Offer.selectMyOffer({username: result.username, usernameSelect: data.data.username, brand: result.brand, model: result.model, price: result.price, city: result.city } )
             .then(function(data){
                 if (!data.data.success) {
                     console.log(data.data.message);

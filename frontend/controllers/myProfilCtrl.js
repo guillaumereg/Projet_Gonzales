@@ -28,7 +28,7 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
     });
 
     Auth.getUser().then(function(data){
-      Offer.getOffersByUsernameSelect({username: data.data.username}) //get all offers from user from database
+      Offer.getOffersByUsernameSelect({usernameSelect: data.data.username}) //get all offers from user from database
         .then(function(data){
             $scope.profile={};
             $scope.showProfile=false;
@@ -63,6 +63,10 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
 
     $scope.changeProfil = function(user) {
         $location.path('/changeProfil');
+    }
+    $scope.maskProfil = function() {
+      $scope.showProfile=false;
+      $scope.profile={};
     }
 
   });

@@ -221,7 +221,7 @@ module.exports = function(router) {
 
     router.post('/myOffers', function(req, res) { //envoie liste des offres de location l'utilisateur
         Offer.find({ username: req.body.username})
-        .select('brand model price city').exec(function(err,offers){
+        .select('brand model price city usernameSelect').exec(function(err,offers){
             if(err){
                 throw err;
             }
@@ -232,7 +232,7 @@ module.exports = function(router) {
     });
 
     router.post('/yourOffers', function(req, res) { //envoie liste des offres de location l'utilisateur
-        Offer.find({ usernameSelect: req.body.username})
+        Offer.find({ usernameSelect: req.body.usernameSelect})
         .select('username brand model price city').exec(function(err,offers){
             if(err){
                 throw err;
@@ -257,20 +257,25 @@ module.exports = function(router) {
     });
 
     router.post('/selectOffer', function(req, res) {
-      Offer.findOne({ _id: req.body.offerId}).select()
-      .exec(function(err,offers){
+      Offer.findOne({username: req.body.username, brand: req.body.brand, model: req.body.model, price: req.body.price, city: req.body.city}).select()
+      .exec(function(err,offer){
           if(err){
-              res.json({ success: false, message: 'impossible de supprimer cette offre' });
+              throw err;
           }
-          else{
-              offers.usernameSelect=req.body.username;
-              offers.save(function(err) { //sauver dans la base de données
+          if(!offer){
+              res.json({success: false, message: 'offre introuvable' });
+          }
+          else if(offer){
+            if (offer.usernameSelect== null || offer.usernameSelect==""){
+              offer.usernameSelect=req.body.usernameSelect;
+              offer.save(function(err) { //sauver dans la base de données
                   if (err) {
                       res.json({ success: false, message: 'Faute de format d entrée' });
                   } else {
                       res.json({ success: true, message: 'offre modifiée!' });
                   }
               });
+            }
           }
       });
     });

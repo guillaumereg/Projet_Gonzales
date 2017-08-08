@@ -61,4 +61,10 @@ angular.module('myOffersController', ['offerServices', 'authServices','userServi
                 }
             });
         }
+        $scope.maskProfil = function() {
+          $scope.showProfile=false;
+          $scope.profile={};
+          $scope.evaluations={};
+          $scope.showEvaluation=false;
+        }
     });
