@@ -2,7 +2,7 @@ angular.module('searchOffersController', ['offerServices', 'authServices','evalu
 //ajouter nouveau module crée (userControllers) entre [] de app.js pour pouvoir l'utiliser dans d'autres modules
     .controller('searchOffersCtrl', function($location, Offer, Auth, $route, $scope, User, Evaluation) {   //add factory User !!!! pour utiliser ce factory du module  userservices
 
-        var currentUser;
+        var currentUser={};
         $scope.showResults=false;
         $scope.showProfile=false;
         $scope.showEvaluation=false;

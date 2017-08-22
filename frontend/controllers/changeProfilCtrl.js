@@ -3,11 +3,20 @@ angular.module('changeProfilController', ['authServices','userServices']) //util
   .controller('changeProfilCtrl', function($location, User, Auth, $route, $scope) {   //add factory User !!!! pour utiliser ce factory du module  userservices
 
 
+    Auth.getUser().then(function(data){
+      console.log(data);
+      $scope.age = data.data.age;
+      $scope.phoneNumber = data.data.phoneNumber;
+      $scope.country = data.data.country;
+      $scope.city = data.data.city;
+    });
+
+
     $scope.saveChange = function() {
       Auth.getUser().then(function(data){
         var username = data.data.username;
-        User.changeMyProfil({age: $scope.regData.age, phoneNumber: $scope.regData.phoneNumber,
-                      country: $scope.regData.country, city:  $scope.regData.city, username:data.data.username})
+        User.changeMyProfil({age: $scope.age, phoneNumber: $scope.phoneNumber,
+                      country: $scope.country, city:  $scope.city, username:data.data.username})
                       .then(function(data){
             if (data.data.success) {  // rediriger vers la page home en cas de succes
                 $location.path('/myProfil');

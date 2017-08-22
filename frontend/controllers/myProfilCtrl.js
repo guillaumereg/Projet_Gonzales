@@ -4,7 +4,10 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
 
 
     $scope.showProfile=false;
+    $scope.showEvaluation=false;
     $scope.profile={};
+    $scope.evaluations={};
+    var currentUser={};
     Auth.getUser().then(function(data){
         User.getUserByUsername({username: data.data.username}) //get user from database
         .then(function(data){
@@ -40,7 +43,12 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
         });
     });
 
+
     $scope.goToProfile = function(username){
+        $scope.profile={};
+        $scope.evaluations={};
+        $scope.showEvaluation=false;
+        currentUser=username;
         User.getUserByUsername({username: username}).then(function(data){
             if (data.data.success) {
                 $scope.showProfile=true;
@@ -51,6 +59,20 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
             }
         });
     }
+
+    $scope.goToEval = function(){
+        $scope.evaluations={};
+        Evaluation.getEvaluationByUsername({username: currentUser}).then(function(data){
+            if (data.data.success) {
+                $scope.showEvaluation=true;
+                $scope.evaluations=data.data.evaluations;
+            }
+            else{
+                console.log(data.data.message);
+            }
+        });
+    }
+
     $scope.deleteOffer = function(offer) {
         Offer.unselectOffer({offerId: $scope.offers[ $scope.offers.indexOf(offer) ]._id})
         .then(function(data){

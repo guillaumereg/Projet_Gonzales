@@ -51,16 +51,18 @@
 		<table ng-show="showProfile" class="table" style="margin-top : 50px" >
 			<strong> {{profile.username}} profil :</strong>
 			<tr>
+				<td> <strong> Evaluation </strong> </td>
 				<td> <strong> Country </strong> </td>
 				<td> <strong> City </strong> </td>
 				<td> <strong> Phone number </strong> </td>
 				<td> <strong> Previous </strong> </td>
 			</tr>
 			<tr>
+				<td> <a href='#' ng-click = "goToEval()"><p>Show evaluations about {{profile.username}}</p></a></td>
 				<td>{{profile.country}}</td>
 				<td>{{profile.city}}</td>
 				<td>{{profile.phoneNumber}}</td>
-				<td> <a href='#' ng-click = "maskProfil()">"mask"</a></td>
+				<td> <a href='#' ng-click = "maskProfil()"><p>hide</p></a></td>
 			</tr>
 		</table>
 
