@@ -3,5 +3,5 @@ angular.module('rentCarApp', ['appRoutes','registerCtrl', 'mainController',
 							  'offerController', 'myOffersController','searchOffersController','myProfilController','changeProfilController','createEvaluationController'])
 
 .config(function($httpProvider){   //configure app to intercept all http requests with this factory we created which assigns token to header
-	$httpProvider.interceptors.push('AuthEveryRequest');
+	$httpProvider.interceptors.push('AuthEveryHttpRequest');
 });

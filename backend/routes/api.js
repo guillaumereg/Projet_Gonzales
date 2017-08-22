@@ -96,10 +96,10 @@ module.exports = function(router) {
                     res.json({success: false, message: 'authentication impossible, pas utilisateur avec cet identifiant dans la base de données' });
                 }
                 else if(user){            //= mot de passe soumis
-                    if(user.checkPassword(req.body.password)){  //user est connecté
-                        var token = jwt.sign({username: user.username, age: user.age,
+                    if(user.checkPassword(req.body.password)){  //mot de passe correct
+                        var token = jwt.sign({username: user.username, age: user.age, //création du token
                                            phoneNumber: user.phoneNumber, country: user.country, city: user.city }, secret, {expiresIn: '1h'});
-                        res.json({ success: true, message: 'user loggs in' , token: token});
+                        res.json({ success: true, message: 'user loggs in' , token: token}); //renvoie le TOKEN
                     }
                     else{
                         res.json({ success: false, message: 'wrong password' });
@@ -114,7 +114,7 @@ module.exports = function(router) {
         if(token){ //si il y a un token
             jwt.verify(token, secret, function(err, decoded){
                 if(err){
-                    res.json({ success: false, message: 'token non valide' });
+                    res.json({ success: false, message: 'token non valide' }); //existe mais expiré
                 }
                 else{
                     req.decoded = decoded;    //maintenant accessible dans req de /getInfo
@@ -127,7 +127,7 @@ module.exports = function(router) {
         }
     });
 
-    router.post('/getInfo', function(req, res){ //decrypte le token en utilisant middleware et renvoie au client
+    router.post('/getInfo', function(req, res){ //decrypte le token de l'utilisateur courant en utilisant middleware et le retourne
         res.send(req.decoded);
     });
 
