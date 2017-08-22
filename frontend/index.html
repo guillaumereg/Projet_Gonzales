@@ -30,7 +30,7 @@
 
   </head>
 
-  <body ng-controller= "mainCtrl as main">      <!-- login est le nouveau nom du controlleur -->
+  <body style="background-image: url(car.png);" ng-controller= "mainCtrl as main">      <!-- login est le nouveau nom du controlleur -->
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -54,6 +54,7 @@
             <li ng-show = "main.loggedIn" ng-click = "main.logout();" ><a href="#">Logout</a></li>
             <li ng-show = "!main.loggedIn"><a href="/">Login</a></li>
             <li ng-show = "!main.loggedIn"><a href="/register">Register</a></li>
+            <li><a href="/contact">Contact Us</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -64,7 +65,6 @@
       <div ng-view style="margin-top: 100px"> </div>  <!-- home.html login.html etc se trouvent ici-->
 
     </div> <!-- /container -->
-
     <script src="angular/jquery-3.2.1.min.js"> </script>
     <script src="angular/bootstrap.js"> </script>
   </body>

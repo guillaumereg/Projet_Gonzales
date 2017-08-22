@@ -1,9 +1,9 @@
 angular.module('mainController', ['authServices'])
-    .controller('mainCtrl', function($location, Auth, $route, $rootScope) {   
+    .controller('mainCtrl', function($location, Auth, $route, $rootScope) {
         var app = this;
 
         $rootScope.$on('$routeChangeStart', function(event, next){ // intercepter changement de route
-            if(!Auth.isLoggedIn()){//pas connecté 
+            if(!Auth.isLoggedIn()){//pas connecté
                 console.log('user is NOT logged in');
                 app.username = '';
                 app.loggedIn = false;
@@ -25,7 +25,7 @@ angular.module('mainController', ['authServices'])
             .then(function(data) { //une fois que service est terminé, prend le data retourné en paramêtre
                 if (data.data.success) {  // rediriger vers la page principale en cas de succes
                     $location.path('/home');
-                } 
+                }
                 else {
                     console.log(data.data.message);
                 }

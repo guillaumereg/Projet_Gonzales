@@ -48,7 +48,10 @@ angular.module('appRoutes', ['ngRoute'])      //ng route to create route
                 controller: 'createEvaluationCtrl'
 
             })
-
+            .when('/contact', {
+                templateUrl: 'views/contact.html' ,
+                isLogin : true
+            })
             .otherwise({
                 templateUrl: 'views/unknown.html'
             });
