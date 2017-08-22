@@ -14,7 +14,7 @@ module.exports = function(router) {
          || req.body.phoneNumber == null|| req.body.phoneNumber == ''
          || req.body.country == null || req.body.country == ''
          || req.body.city == null || req.body.city == '') {
-            res.json({ success: false, message: 'données ne sont pas complètes' });
+            res.json({ success: false, message: 'form is not complete' });
         }
         else {
             var user = new User();
@@ -85,7 +85,7 @@ module.exports = function(router) {
 
     router.post('/login', function(req, res) { //login d'un utilisateur
         if (req.body.username == null || req.body.username == '' || req.body.password == null || req.body.password == ''){
-            res.json({ success: false, message: 'Identifiant et/ou mot de passe doivent être spécifiés' });
+            res.json({ success: false, message: 'Form is not completed' });
         }
         else{                                                   //attributs qu'on veut avoir dans variable user
             User.findOne({ username: req.body.username}).select('username hash salt age phoneNumber country city').exec(function(err,user){
@@ -93,7 +93,7 @@ module.exports = function(router) {
                     throw err;
                 }
                 if(!user){
-                    res.json({success: false, message: 'authentication impossible, pas utilisateur avec cet identifiant dans la base de données' });
+                    res.json({success: false, message: 'Account does not exist' });
                 }
                 else if(user){            //= mot de passe soumis
                     if(user.checkPassword(req.body.password)){  //user est connecté
@@ -102,12 +102,9 @@ module.exports = function(router) {
                         res.json({ success: true, message: 'user loggs in' , token: token});
                     }
                     else{
-                        res.json({ success: false, message: 'wrong password' });
-                    }
-                }
-            });
-        }
-    });
+                        res.json({ success: false, message: 'Wrong password'});
+                        }
+    }})}});
 
     router.use(function(req, res, next){ //middleware pour /getInfo
         var token = req.body.token || req.body.query || req.headers['x-access-token']; //récuperer le token de la requete

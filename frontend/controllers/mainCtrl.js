@@ -1,5 +1,5 @@
 angular.module('mainController', ['authServices'])
-    .controller('mainCtrl', function($location, Auth, $route, $rootScope) {
+    .controller('mainCtrl', function($location, Auth, $route, $rootScope, $scope) {
         var app = this;
 
         $rootScope.$on('$routeChangeStart', function(event, next){ // intercepter changement de route
@@ -21,13 +21,17 @@ angular.module('mainController', ['authServices'])
         })
 
         app.logUser = function(logData) {
-            Auth.login(app.logData)  // démarrer service du factory Auth dans le module authServices
+          $scope.error={};
+          $scope.showError=false;
+          Auth.login(app.logData)  // démarrer service du factory Auth dans le module authServices
             .then(function(data) { //une fois que service est terminé, prend le data retourné en paramêtre
                 if (data.data.success) {  // rediriger vers la page principale en cas de succes
                     $location.path('/home');
                 }
                 else {
                     console.log(data.data.message);
+                    $scope.error=data.data.message;
+                    $scope.showError=true;
                 }
             });
         };
