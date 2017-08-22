@@ -302,7 +302,7 @@ module.exports = function(router) {
     router.post('/searchOffer', function(req, res) { //envoie liste des offres de location d'autres utilisateurs
         console.log(req.body);
         Offer.find(req.body)
-        .select('username brand model price city').exec(function(err,offers){
+        .select('username brand model price city usernameSelect').exec(function(err,offers){
             if(err){
                 console.log(err);
                 res.json({ success: false, message: 'impossible de chercher des offres' });
