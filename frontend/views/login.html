@@ -1,10 +1,10 @@
 <center>
-	<div style="background-color: white;width:600px;height:400px;border:1px solid #999999;">
+	<div style="background-color: white;padding-bottom: 50px;width: 500px;border:1px solid #999999;">
 		<div class= "page-header">
 			<h1>User login </h1>
 		</div>
 			<form ng-submit="main.logUser(logData);">
-				<p ng-show="showError" style= "background-color: red ; color:white"> {{error}} </p>
+				<p ng-show="showError" style= "background-color: red ; color:white;"> {{error}} </p>
 				<label>Username: </label>
 				<input class="form-control" style="width: 300px" type="text" name="username" ng-model="main.logData.username">
 				<br>

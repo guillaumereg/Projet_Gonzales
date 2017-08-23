@@ -1,22 +1,26 @@
-<div class="page-header">
+<center>
+	<div class="page-header">
+		<div style="background-color: white;padding: 25px;width: 500px;border:1px solid #999999;">
+			<form ng-submit="findOffers()">
+				<label>Brand: </label>
+				<input class="form-control" style="width: 300px" name="brand" type="text" ng-model="searchData.brand">
+				<br>
 
-	<form ng-submit="findOffers()">
-		<label>Brand: </label>
-		<input class="form-control" style="width: 300px" name="brand" type="text" ng-model="searchData.brand">
-		<br>
+				<label>Model: </label>
+				<input class="form-control" style="width: 300px" name="model" type="text" ng-model="searchData.model">
+				<br>
 
-		<label>Model: </label>
-		<input class="form-control" style="width: 300px" name="model" type="text" ng-model="searchData.model">
-		<br>
+				<label>City: </label>
+				<input class="form-control" style="width: 300px" name="city" type="text" ng-model="searchData.city">
+				<br>
 
-		<label>City: </label>
-		<input class="form-control" style="width: 300px" name="city" type="text" ng-model="searchData.city">
-		<br>
+				<button class= "btn btn-primary" type= "submit"> Search </button>
+			</form>
+		</div>
+	</div>
+</center>
 
-		<button class= "btn btn-primary" type= "submit"> Search </button>
-	</form>
-
-	<table ng-show="showResults" class="table" style="margin-top : 50px" >
+<table ng-show="showResults" class="table" style="background-color: white;border:1px solid #999999;margin-top : 50px" >
 		<tr>
 			<td> <strong> Username</strong> </td>
 			<td> <strong> Brand </strong> </td>
@@ -35,12 +39,12 @@
 			<td>{{result.city}}</td>
 			<td>{{result.usernameSelect}}</td>
 			<td>
-			 <button ng-click="selectOffer(result)" type="button" > select </button>
+			<button ng-click="selectOffer(result)" class="btn btn-primary" type="button" > Select </button>
 			</td>
 		</tr>
 	</table>
 
-	<table ng-show="showProfile" class="table" style="margin-top : 50px" >
+	<table ng-show="showProfile" class="table" style="background-color: white;border:1px solid #999999;margin-top : 50px" >
 		<strong> {{profile.username}} </strong>
 		<tr>
 			<td> <strong> Evaluation </strong> </td>
@@ -58,7 +62,7 @@
 		</tr>
 	</table>
 
-	<table ng-show="showEvaluation" class="table" style="margin-top : 50px" >
+	<table ng-show="showEvaluation" class="table" style="background-color: white; border:1px solid #999999;margin-top : 50px" >
 		<strong></strong>
 		<tr>
 			<td> <strong> Author :</strong> </td>
@@ -71,5 +75,3 @@
 			<td>{{evaluation.commentary}}</td>
 		</tr>
 	</table>
-
-</div>

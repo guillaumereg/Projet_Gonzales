@@ -1,24 +1,29 @@
-<div class= "page-header">
-	<h1>Rent my car </h1>
-</div>
+<center>
+		<div class= "page-header">
+			<h1>Rent my car </h1>
+		</div>
+		<div style="background-color: white;width: 500px; heigth: auto;padding-bottom: 25px;">
+			<form ng-submit="createOffer()">
 
-<form ng-submit="createOffer()">
+				<p ng-show="offerError" style= "background-color: red ; color:white;"> {{offerMessage}} </p>
 
-	<label>Brand : </label>
-	<input class="form-control" style="width: 300px" name="brand" type="text" ng-model="brand">
-	<br>
+				<label>Brand : </label>
+				<input class="form-control" style="width: 300px" name="brand" type="text" ng-model="brand">
+				<br>
 
-	<label>Model : </label>
-	<input class="form-control" style="width: 300px" name="model" type="text" ng-model="model">
-	<br>
+				<label>Model : </label>
+				<input class="form-control" style="width: 300px" name="model" type="text" ng-model="model">
+				<br>
 
-	<label>Price per day (€) : </label>
-	<input class="form-control" style="width: 300px" name="price" type="text" ng-model="price">
-	<br>
+				<label>Price per day (€) : </label>
+				<input class="form-control" style="width: 300px" name="price" type="text" ng-model="price">
+				<br>
 
-	<label>City : </label>
-	<input class="form-control" style="width: 300px" name="city" type="text" ng-model="city">
-	<br>
+				<label>City : </label>
+				<input class="form-control" style="width: 300px" name="city" type="text" ng-model="city">
+				<br>
 
-	<button class= "btn btn-primary" type= "submit"> Save offer </button>
-</form>
+				<button class= "btn btn-primary" type= "submit"> Save offer </button>
+			</form>
+	</div>
+</center>

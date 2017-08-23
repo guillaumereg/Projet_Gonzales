@@ -1,87 +1,88 @@
-<div class= "page-header">
-	<h3> {{user.username}} </h3>
+<center>
+	<div class= "page-header">
+		<h3> {{user.username}} </h3>
+	</div>
+	<div style="background-color: white;padding-left: 10px; padding-right: 10px;">
+			<table class="table">
+			  <tr>
+			    <td> <strong> Username : 	{{user.username}} </strong> </td>
+					<tr></tr>
+			    <td> <strong> Age : 	{{user.age}} </strong> </td>
+					<tr></tr>
+			    <td> <strong> Phone number : 	{{user.phoneNumber}} </strong> </td>
+					<tr></tr>
+			    <td> <strong> Country :	 {{user.country}} </strong> </td>
+					<tr></tr>
+			    <td> <strong> City :	 {{user.city}} </strong> </td>
+					<tr></tr>
+					<td>
+						 <button class= "btn btn-primary" style="width: 120px" ng-click="changeProfil(user)" type="button" > Change profil </button>
+					</td>
+			  </tr>
+
+			</table>
+
+			<br>
+			<h3> Offers that you have selected </h3>
+			<br>
+
+				<table class="table">
+					<tr>
+						<td> <strong> Author  </strong> </td>
+						<td> <strong> Brand  </strong> </td>
+						<td> <strong> Model  </strong> </td>
+						<td> <strong> Price per day  </strong> </td>
+						<td> <strong> City  </strong> </td>
+						<td> <strong> Delete </strong> </td>
+					</tr>
+
+					<tr ng-repeat="offer in offers">
+						<td><a href='#' ng-click = "goToProfile(offer.username)">{{offer.username}}</a></td>
+						<td>{{offer.brand}}</td>
+						<td>{{offer.model}}</td>
+						<td>{{offer.price}}</td>
+						<td>{{offer.city}}</td>
+						<td>
+							 <button ng-click="deleteOffer(offer)" type="button" class="btn btn-danger">Delete offer</button>
+						</td>
+					</tr>
+				</table>
 
 
-	<table class="table">
-	  <tr>
-	    <td> <strong> Username : {{user.username}} </strong> </td>
-			<tr></tr>
-	    <td> <strong> Age : {{user.age}} </strong> </td>
-			<tr></tr>
-	    <td> <strong> Phone number : {{user.phoneNumber}} </strong> </td>
-			<tr></tr>
-	    <td> <strong> Country : {{user.country}} </strong> </td>
-			<tr></tr>
-	    <td> <strong> City : {{user.city}} </strong> </td>
-			<tr></tr>
-			<td>
-				 <button class= "btn btn-primary" style="width: 120px" ng-click="changeProfil(user)" type="button" > Change profil </button>
-			</td>
-	  </tr>
+				<table ng-show="showProfile" class="table" style="margin-top : 50px" >
+					<strong> {{profile.username}} </strong>
+					<tr>
+						<td> <strong> Evaluation </strong> </td>
+						<td> <strong> Country </strong> </td>
+						<td> <strong> City </strong> </td>
+						<td> <strong> Phone number </strong> </td>
+						<td> <strong> Previous </strong> </td>
+					</tr>
+					<tr>
+						<td> <a href='#' ng-click = "goToEval()"><p>Show evaluations about {{profile.username}}</p></a></td>
+						<td>{{profile.country}}</td>
+						<td>{{profile.city}}</td>
+						<td>{{profile.phoneNumber}}</td>
+						<td> <a href='#' ng-click = "maskProfil()"><p>hide</p></a></td>
+					</tr>
+				</table>
 
-	</table>
+			<br>
+		  <h3> Evaluation about {{user.username}} </h3>
+			<br>
 
-	<br>
-	<h3> Offers that you have selected </h3>
-	<br>
+			<table class="table">
+				<tr>
+					<td> <strong> Author : </strong> </td>
+					<td> <strong> Evaluation (/10) : </strong> </td>
+					<td> <strong> Commentary : </strong> </td>
+				</tr>
 
-		<table class="table">
-			<tr>
-				<td> <strong> Author  </strong> </td>
-				<td> <strong> Brand  </strong> </td>
-				<td> <strong> Model  </strong> </td>
-				<td> <strong> Price per day  </strong> </td>
-				<td> <strong> City  </strong> </td>
-				<td> <strong> Delete </strong> </td>
-			</tr>
-
-			<tr ng-repeat="offer in offers">
-				<td><a href='#' ng-click = "goToProfile(offer.username)">{{offer.username}}</a></td>
-				<td>{{offer.brand}}</td>
-				<td>{{offer.model}}</td>
-				<td>{{offer.price}}</td>
-				<td>{{offer.city}}</td>
-				<td>
-					 <button ng-click="deleteOffer(offer)" type="button" class="btn btn-danger">Delete offer</button>
-				</td>
-			</tr>
-		</table>
-
-
-		<table ng-show="showProfile" class="table" style="margin-top : 50px" >
-			<strong> {{profile.username}} profil :</strong>
-			<tr>
-				<td> <strong> Evaluation </strong> </td>
-				<td> <strong> Country </strong> </td>
-				<td> <strong> City </strong> </td>
-				<td> <strong> Phone number </strong> </td>
-				<td> <strong> Previous </strong> </td>
-			</tr>
-			<tr>
-				<td> <a href='#' ng-click = "goToEval()"><p>Show evaluations about {{profile.username}}</p></a></td>
-				<td>{{profile.country}}</td>
-				<td>{{profile.city}}</td>
-				<td>{{profile.phoneNumber}}</td>
-				<td> <a href='#' ng-click = "maskProfil()"><p>hide</p></a></td>
-			</tr>
-		</table>
-
-	<br>
-  <h3> Evaluation about {{user.username}} </h3>
-	<br>
-
-	<table class="table">
-		<tr>
-			<td> <strong> Author : </strong> </td>
-			<td> <strong> Evaluation (/10) : </strong> </td>
-			<td> <strong> Commentary : </strong> </td>
-		</tr>
-
-		<tr ng-repeat="evaluation in evaluations">
-			<td>{{evaluation.author}}</td>
-			<td>{{evaluation.eval}}</td>
-			<td>{{evaluation.commentary}}</td>
-		</tr>
-	</table>
-
-</div>
+				<tr ng-repeat="evaluation in evaluations">
+					<td>{{evaluation.author}}</td>
+					<td>{{evaluation.eval}}</td>
+					<td>{{evaluation.commentary}}</td>
+				</tr>
+			</table>
+	</div>
+</center>

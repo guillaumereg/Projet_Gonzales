@@ -195,7 +195,7 @@ module.exports = function(router) {
          || req.body.model == null || req.body.model == ''
          || req.body.price == null|| req.body.price == ''
          || req.body.city == null|| req.body.city == '' ) {
-            res.json({ success: false, message: 'données ne sont pas complètes' });
+            res.json({ success: false, message: 'Data Missed' });
         }
         else {
             var offer = new Offer();
@@ -206,7 +206,7 @@ module.exports = function(router) {
             offer.city = req.body.city;
             offer.save(function(err) { //sauver dans la base de données
                 if (err) {
-                    res.json({ success: false, message: 'Faute de format d entrée' });
+                    res.json({ success: false, message: 'Format Error' });
                 } else {
                     res.json({ success: true, message: 'offre crée!' }); //utilisateur a été sauvé, renvoyer réponse
                 }

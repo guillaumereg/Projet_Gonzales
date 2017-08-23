@@ -19,26 +19,25 @@
 		<button class= "btn btn-primary" type= "submit"> Save evaluation </button>
 
 	</form>
-
-	<br>
-  <h3> Previous evaluation : </h3>
-	<br>
-
-	<table class="table">
-		<tr>
-			<td> <strong> Username : </strong> </td>
-			<td> <strong> Evaluation (/10) : </strong> </td>
-			<td> <strong> Commentary : </strong> </td>
-		</tr>
-
-		<tr ng-repeat="evaluation in evaluations">
-			<td>{{evaluation.username}}</td>
-			<td>{{evaluation.eval}}</td>
-			<td>{{evaluation.commentary}}</td>
-			<td>
-				 <button ng-click="deleteEvaluation(evaluation)" type="button" class="btn btn-danger">Delete evaluation</button>
-			</td>
-		</tr>
-	</table>
-
 </div>
+	<div style="background-color: white; padding-rigth:; padding-left:;">
+		<h2> Previous evaluation : </h2>
+		<br>
+			<table class="table">
+				<tr>
+					<td> <strong> Username : </strong> </td>
+					<td> <strong> Evaluation (/10) : </strong> </td>
+					<td> <strong> Commentary : </strong> </td>
+					<td> </td>
+				</tr>
+
+				<tr ng-repeat="evaluation in evaluations">
+					<td>{{evaluation.username}}</td>
+					<td>{{evaluation.eval}}</td>
+					<td>{{evaluation.commentary}}</td>
+					<td>
+						 <button ng-click="deleteEvaluation(evaluation)" type="button" class="btn btn-danger">Delete evaluation</button>
+					</td>
+				</tr>
+			</table>
+	</div>

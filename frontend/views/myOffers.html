@@ -1,58 +1,61 @@
-<div class="page-header">
-	<h3> {{main.username}} </h3>
+<center>
+	<div class="page-header">
+		<h3> Offers of {{main.username}} </h3>
+	</div>
+	<div style="background-color: white;padding-left:20px;padding-right: 20px;">
+		<table class="table">
+			<tr>
+				<td> <strong> Brand </strong> </td>
+				<td> <strong> Model </strong> </td>
+				<td> <strong> Price per day (€) </strong> </td>
+				<td> <strong> City </strong> </td>
+				<td> <strong> Selected by </strong> </td>
+				<td> <strong> Delete </strong> </td>
+			</tr>
 
-	<table class="table">
-		<tr>
-			<td> <strong> Brand </strong> </td>
-			<td> <strong> Model </strong> </td>
-			<td> <strong> Price per day (€) </strong> </td>
-			<td> <strong> City </strong> </td>
-			<td> <strong> Selected by </strong> </td>
-			<td> <strong> Delete </strong> </td>
-		</tr>
+			<tr ng-repeat="offer in offers">
+				<td>{{offer.brand}}</td>
+				<td>{{offer.model}}</td>
+				<td>{{offer.price}}</td>
+				<td>{{offer.city}}</td>
+				<td><a href='#' ng-click = "goToProfile(offer.usernameSelect)">{{offer.usernameSelect}}</a></td>
+				<td>
+					 <button ng-click="deleteOffer(offer)" type="button" class="btn btn-danger">Delete offer</button>
+				</td>
+			</tr>
+		</table>
 
-		<tr ng-repeat="offer in offers">
-			<td>{{offer.brand}}</td>
-			<td>{{offer.model}}</td>
-			<td>{{offer.price}}</td>
-			<td>{{offer.city}}</td>
-			<td><a href='#' ng-click = "goToProfile(offer.usernameSelect)">{{offer.usernameSelect}}</a></td>
-			<td>
-				 <button ng-click="deleteOffer(offer)" type="button" class="btn btn-danger">Delete offer</button>
-			</td>
-		</tr>
-	</table>
+		<table ng-show="showProfile" class="table" style="margin-top: 10px" >
+			<br>
+			<strong> {{profile.username}}</strong>
+			<tr>
+				<td> <strong> Evaluation </strong> </td>
+				<td> <strong> Country </strong> </td>
+				<td> <strong> City </strong> </td>
+				<td> <strong> Phone number </strong> </td>
+				<td> <strong> Previous </strong> </td>
+			</tr>
+			<tr>
+				<td> <a href='#' ng-click = "goToEval()"><p>Show evaluations about {{profile.username}}</p></a></td>
+				<td>{{profile.country}}</td>
+				<td>{{profile.city}}</td>
+				<td>{{profile.phoneNumber}}</td>
+				<td> <a href='#' ng-click = "maskProfil()"><p>hide</p></a></td>
+			</tr>
+		</table>
 
-	<table ng-show="showProfile" class="table" style="margin-top : 50px" >
-		<strong> {{profile.username}} </strong>
-		<tr>
-			<td> <strong> Evaluation </strong> </td>
-			<td> <strong> Country </strong> </td>
-			<td> <strong> City </strong> </td>
-			<td> <strong> Phone number </strong> </td>
-			<td> <strong> Previous </strong> </td>
-		</tr>
-		<tr>
-			<td> <a href='#' ng-click = "goToEval()"><p>Show evaluations about {{profile.username}}</p></a></td>
-			<td>{{profile.country}}</td>
-			<td>{{profile.city}}</td>
-			<td>{{profile.phoneNumber}}</td>
-			<td> <a href='#' ng-click = "maskProfil()"><p>hide</p></a></td>
-		</tr>
-	</table>
-
-	<table ng-show="showEvaluation" class="table" style="margin-top : 50px" >
-		<strong></strong>
-		<tr>
-			<td> <strong> Author :</strong> </td>
-			<td> <strong> Evaluation (/10) :</strong> </td>
-			<td> <strong> Commentary :</strong> </td>
-		</tr>
-		<tr ng-repeat="evaluation in evaluations">
-			<td>{{evaluation.author}}</td>
-			<td>{{evaluation.eval}}</td>
-			<td>{{evaluation.commentary}}</td>
-		</tr>
-	</table>
-
-</div>
+		<table ng-show="showEvaluation" class="table" style="margin-top : 50px" >
+			<strong></strong>
+			<tr>
+				<td> <strong> Author :</strong> </td>
+				<td> <strong> Evaluation (/10) :</strong> </td>
+				<td> <strong> Commentary :</strong> </td>
+			</tr>
+			<tr ng-repeat="evaluation in evaluations">
+				<td>{{evaluation.author}}</td>
+				<td>{{evaluation.eval}}</td>
+				<td>{{evaluation.commentary}}</td>
+			</tr>
+		</table>
+	</div>
+</center>
