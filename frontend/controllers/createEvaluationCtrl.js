@@ -6,8 +6,8 @@ angular.module('createEvaluationController', ['evaluationService','authServices'
         $scope.createEval = function() {
           Auth.getUser().then(function(data){
             var author = data.data.username;
-            Evaluation.create({username: $scope.evaluationData.username, eval: $scope.evaluationData.eval,
-                          commentary: $scope.evaluationData.commentary, author: data.data.username})
+            Evaluation.create({username: $scope.username, eval: $scope.eval,
+                          commentary: $scope.commentary, author: data.data.username})
                           .then(function(data){
 
                 if (data.data.success) {  // rediriger vers la page de login en cas de succes
