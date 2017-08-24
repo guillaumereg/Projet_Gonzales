@@ -1,10 +1,10 @@
 <div class= "page-header">
-	<h1> {{user.username}} profil </h1>
+	<h1 style="color: white;"> Informations {{user.username}} </h1>
 </div>
-	<div style="background-color: white; padding-bottom: 20px; padding-left:20px;">
+	<div style="background-color: white; padding: 0px 25px 25px 25px;">
 			<form ng-submit="saveChange()">
-
-				<p ng-show="changeError" style= "background-color: red ; color:white;"> {{changeMessage}} </p>
+				<br>
+				<p ng-show="changeError" style= "text-align: center; background-color: red ; color:white;"> {{changeMessage}} </p>
 				<br>
 				<label>Age : </label>
 				<input class="form-control" style="width: 300px" name="age" type="text" ng-model="age">
