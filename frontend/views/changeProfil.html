@@ -1,5 +1,5 @@
 <div class= "page-header">
-	<h1 style="color: white;"> Informations {{user.username}} </h1>
+	<h1 style="color: white;"> Informations Of {{username}} </h1>
 </div>
 	<div style="background-color: white; padding: 0px 25px 25px 25px;">
 			<form ng-submit="saveChange()">
@@ -23,6 +23,6 @@
 				<br>
 
 				<button  class= "btn btn-primary" type= "submit"> Save change </button>
-				<button  ng-click="annulation()" type= "button"> Cancel </button>
+				<button  class= "btn btn-danger" ng-click="annulation()" type= "button"> Cancel </button>
 			</form>
 	</div>

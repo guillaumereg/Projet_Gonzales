@@ -6,6 +6,7 @@ angular.module('changeProfilController', ['authServices','userServices']) //util
 
     Auth.getUser().then(function(data){
       console.log(data);
+      $scope.username = data.data.username;
       $scope.age = data.data.age;
       $scope.phoneNumber = data.data.phoneNumber;
       $scope.country = data.data.country;
