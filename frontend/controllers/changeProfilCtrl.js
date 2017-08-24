@@ -1,7 +1,8 @@
 angular.module('changeProfilController', ['authServices','userServices']) //utiliser module userServices entre [] de app.js
 //ajouter nouveau module crée (userControllers) entre [] de app.js pour pouvoir l'utiliser dans d'autres modules
   .controller('changeProfilCtrl', function($location, User, Auth, $route, $scope) {   //add factory User !!!! pour utiliser ce factory du module  userservices
-
+    $scope.changeError = false;
+    $scope.changeMessage = {};
 
     Auth.getUser().then(function(data){
       console.log(data);
@@ -22,6 +23,8 @@ angular.module('changeProfilController', ['authServices','userServices']) //util
                 $location.path('/myProfil');
             } else {
                 console.log(data.data.message);
+                $scope.changeError = true;
+                $scope.changeMessage = data.data.message;
             }
         });
       });

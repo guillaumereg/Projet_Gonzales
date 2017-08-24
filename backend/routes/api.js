@@ -54,7 +54,7 @@ module.exports = function(router) {
                 || req.body.phoneNumber == null|| req.body.phoneNumber == ''
                 || req.body.country == null || req.body.country == ''
                 || req.body.city == null || req.body.city == '') {
-                   res.json({ success: false, message: 'données ne sont pas complètes' });
+                   res.json({ success: false, message: 'Data Missed' });
          }
          else{
            User.findOne({ username: req.body.username})
@@ -72,7 +72,7 @@ module.exports = function(router) {
                  user.city=req.body.city;
                  user.save(function(err) { //sauver dans la base de données
                      if (err) {
-                         res.json({ success: false, message: 'Cet identifiant existe déja ou faute de format d entrée' });
+                         res.json({ success: false, message: 'Format Error' });
                      } else {
                          res.json({ success: true, message: 'user modified!' }); //utilisateur a été sauvé, renvoyer réponse
                      }

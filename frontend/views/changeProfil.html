@@ -4,6 +4,7 @@
 	<div style="background-color: white; padding-bottom: 20px; padding-left:20px;">
 			<form ng-submit="saveChange()">
 
+				<p ng-show="changeError" style= "background-color: red ; color:white;"> {{changeMessage}} </p>
 				<br>
 				<label>Age : </label>
 				<input class="form-control" style="width: 300px" name="age" type="text" ng-model="age">
