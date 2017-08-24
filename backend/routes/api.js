@@ -134,7 +134,7 @@ module.exports = function(router) {
          || req.body.eval == null || req.body.eval == ''
          || req.body.commentary == null || req.body.commentary == ''
          || req.body.author == null || req.body.author == '') {
-            res.json({ success: false, message: 'données ne sont pas complètes' });
+            res.json({ success: false, message: 'Form is not completed' });
         }
         else {
             var evaluation = new Evaluation();
@@ -144,7 +144,7 @@ module.exports = function(router) {
             evaluation.author=req.body.author;
             evaluation.save(function(err) { //sauver dans la base de données
                 if (err) {
-                    res.json({ success: false, message: 'Faute de format d entrée' });
+                    res.json({ success: false, message: 'Format Error' });
                 } else {
                     res.json({ success: true, message: 'Evaluation créée!' }); //utilisateur a été sauvé, renvoyer réponse
                 }

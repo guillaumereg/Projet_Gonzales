@@ -1,77 +1,76 @@
 <center>
 	<div class="page-header">
-		<div style="background-color: white;padding: 25px;width: 500px;border:1px solid #999999;">
-			<form ng-submit="findOffers()">
-				<label>Brand: </label>
-				<input class="form-control" style="width: 300px" name="brand" type="text" ng-model="searchData.brand">
-				<br>
-
-				<label>Model: </label>
-				<input class="form-control" style="width: 300px" name="model" type="text" ng-model="searchData.model">
-				<br>
-
-				<label>City: </label>
-				<input class="form-control" style="width: 300px" name="city" type="text" ng-model="searchData.city">
-				<br>
-
-				<button class= "btn btn-primary" type= "submit"> Search </button>
-			</form>
-		</div>
+		<h1 style="color: white;"> Rent A Car </h1>
 	</div>
-</center>
+	<div style="background-color: white;padding: 25px;width: 500px;border:1px solid #999999;">
+		<form ng-submit="findOffers()">
+			<label>Brand: </label>
+			<input class="form-control" style="width: 300px" name="brand" type="text" ng-model="searchData.brand">
+			<br>
 
-<table ng-show="showResults" class="table" style="background-color: white;border:1px solid #999999;margin-top : 50px" >
-		<tr>
-			<td> <strong> Username</strong> </td>
-			<td> <strong> Brand </strong> </td>
-			<td> <strong> Model </strong> </td>
-			<td> <strong> € Per day </strong> </td>
-			<td> <strong> City </strong> </td>
-			<td> <strong> Already selected by </strong> </td>
-			<td> <strong> Select </strong> </td>
-		</tr>
+			<label>Model: </label>
+			<input class="form-control" style="width: 300px" name="model" type="text" ng-model="searchData.model">
+			<br>
 
-		<tr ng-repeat="result in results">
-			<td> <a href='#' ng-click = "goToProfile(result.username)">{{result.username}}</a></td>
-			<td>{{result.brand}}</td>
-			<td>{{result.model}}</td>
-			<td>{{result.price}}</td>
-			<td>{{result.city}}</td>
-			<td>{{result.usernameSelect}}</td>
-			<td>
-			<button ng-click="selectOffer(result)" class="btn btn-primary" type="button" > Select </button>
-			</td>
-		</tr>
-	</table>
+			<label>City: </label>
+			<input class="form-control" style="width: 300px" name="city" type="text" ng-model="searchData.city">
+			<br>
 
-	<table ng-show="showProfile" class="table" style="background-color: white;border:1px solid #999999;margin-top : 50px" >
-		<strong> {{profile.username}} </strong>
-		<tr>
-			<td> <strong> Evaluation </strong> </td>
-			<td> <strong> Country </strong> </td>
-			<td> <strong> City </strong> </td>
-			<td> <strong> Phone number </strong> </td>
-			<td> <strong> Previous </strong> </td>
-		</tr>
-		<tr>
-			<td> <a href='#' ng-click = "goToEval()"><p>Show evaluations about {{profile.username}}</p></a></td>
-			<td>{{profile.country}}</td>
-			<td>{{profile.city}}</td>
-			<td>{{profile.phoneNumber}}</td>
-			<td> <a href='#' ng-click = "findOffers()"><p>show offers</p></a></td>
-		</tr>
-	</table>
+			<button class= "btn btn-primary" type= "submit"> Search </button>
+		</form>
+	</div>
+	<table ng-show="showResults" class="table" style="background-color: white;border:1px solid #999999;margin-top : 50px" >
+			<tr>
+				<td> <strong> Username</strong> </td>
+				<td> <strong> Brand </strong> </td>
+				<td> <strong> Model </strong> </td>
+				<td> <strong> € Per day </strong> </td>
+				<td> <strong> City </strong> </td>
+				<td> <strong> Already selected by </strong> </td>
+				<td> <strong> Select </strong> </td>
+			</tr>
 
-	<table ng-show="showEvaluation" class="table" style="background-color: white; border:1px solid #999999;margin-top : 50px" >
-		<strong></strong>
-		<tr>
-			<td> <strong> Author :</strong> </td>
-			<td> <strong> Evaluation (/10) :</strong> </td>
-			<td> <strong> Commentary :</strong> </td>
-		</tr>
-		<tr ng-repeat="evaluation in evaluations">
-			<td>{{evaluation.author}}</td>
-			<td>{{evaluation.eval}}</td>
-			<td>{{evaluation.commentary}}</td>
-		</tr>
-	</table>
+			<tr ng-repeat="result in results">
+				<td> <a href='#' ng-click = "goToProfile(result.username)">{{result.username}}</a></td>
+				<td>{{result.brand}}</td>
+				<td>{{result.model}}</td>
+				<td>{{result.price}}</td>
+				<td>{{result.city}}</td>
+				<td>{{result.usernameSelect}}</td>
+				<td>
+				<button ng-click="selectOffer(result)" class="btn btn-primary" type="button" > Select </button>
+				</td>
+			</tr>
+		</table>
+
+		<table ng-show="showProfile" class="table" style="background-color: white;border:1px solid #999999;margin-top : 50px" >
+			<tr>
+				<td> <strong> Evaluation </strong> </td>
+				<td> <strong> Country </strong> </td>
+				<td> <strong> City </strong> </td>
+				<td> <strong> Phone number </strong> </td>
+				<td> <strong> Previous </strong> </td>
+			</tr>
+			<tr>
+				<td> <a href='#' ng-click = "goToEval()"><p>Show evaluations about {{profile.username}}</p></a></td>
+				<td>{{profile.country}}</td>
+				<td>{{profile.city}}</td>
+				<td>{{profile.phoneNumber}}</td>
+				<td> <a href='#' ng-click = "findOffers()"><p>show offers</p></a></td>
+			</tr>
+		</table>
+
+		<table ng-show="showEvaluation" class="table" style="background-color: white; border:1px solid #999999;margin-top : 50px" >
+			<strong></strong>
+			<tr>
+				<td> <strong> Author :</strong> </td>
+				<td> <strong> Evaluation (/10) :</strong> </td>
+				<td> <strong> Commentary :</strong> </td>
+			</tr>
+			<tr ng-repeat="evaluation in evaluations">
+				<td>{{evaluation.author}}</td>
+				<td>{{evaluation.eval}}</td>
+				<td>{{evaluation.commentary}}</td>
+			</tr>
+		</table>
+	</center>

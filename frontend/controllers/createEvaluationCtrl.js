@@ -1,7 +1,8 @@
 angular.module('createEvaluationController', ['evaluationService','authServices']) //utiliser module userServices entre [] de app.js
 //ajouter nouveau module crée (userControllers) entre [] de app.js pour pouvoir l'utiliser dans d'autres modules
     .controller('createEvaluationCtrl', function($location, Evaluation, Auth, $route, $scope) {   //add factory User !!!! pour utiliser ce factory du module  userservices
-
+        $scope.errorEval = false;
+        $scope.evalMessage = {};
         $scope.createEval = function() {
           Auth.getUser().then(function(data){
             var author = data.data.username;
@@ -13,6 +14,8 @@ angular.module('createEvaluationController', ['evaluationService','authServices'
                     $location.path('/home');
                 } else {
                     console.log(data.data.message);
+                    $scope.errorEval = true;
+                    $scope.evalMessage = data.data.message;
                 }
             });
           });

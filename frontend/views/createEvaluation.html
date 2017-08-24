@@ -2,11 +2,12 @@
 	<h1>Create an evaluation </h1>
 </div>
 
-<div style="background-color: white; padding-rigth: 25px; padding-left: 20px;">
+<div style="background-color: white;padding-left: 25px;padding-right: 25px;">
 	<form ng-submit="createEval()">
+		<p ng-show="errorEval" style= "background-color: red ; color: white; text-align: center;"> {{evalMessage}} </p>
 
 		<label>Username : </label>
-		<input class="form-control" style="width: 300px" name="username" type="text" ng-model="evaluationData.username">
+		<input class="form-control" style="width: 300px;" name="username" type="text" ng-model="evaluationData.username">
 		<br>
 
 		<label>Evaluation (/10) : </label>
