@@ -9,25 +9,30 @@ angular.module('searchOffersController', ['offerServices', 'authServices','evalu
         $scope.profile={};
         $scope.evaluations={};
         $scope.results={};
+        $scope.searchData = {brand:'', model:'', city:''};
         $scope.findOffers = function() {
             $scope.results={};
             $scope.profile={};
             $scope.evaluations={};
             $scope.showProfile=false;
             $scope.showEvaluation=false;
-            if($scope.searchData === undefined || $scope.searchData === null){  // l'utilisateur n'a rien spécifié
-                $scope.searchData=null;
+            if($scope.brand !=="" && $scope.brand !==undefined){  
+                $scope.searchData.brand = $scope.brand.toLowerCase();
             }
-            else{
-                if($scope.searchData.brand ===""){  // marque non spécifiée
-                    delete $scope.searchData.brand;
-                }
-                if($scope.searchData.model ===""){ //modèle non spécifié
-                    delete $scope.searchData.model;
-                }
-                if($scope.searchData.city ===""){ //modèle non spécifié
-                    delete $scope.searchData.city;
-                }
+            else {
+                delete $scope.searchData.brand;
+            }
+            if($scope.model !=="" && $scope.model !==undefined){  
+                $scope.searchData.model = $scope.model.toLowerCase();
+            }
+            else {
+                delete $scope.searchData.model;
+            }
+            if($scope.city !=="" && $scope.city !==undefined){
+                $scope.searchData.city = $scope.city.toLowerCase();
+            }
+            else {
+                delete $scope.searchData.city;
             }
             Offer.searchOffers($scope.searchData).then(function(data){
                 if (data.data.success) {  // rediriger vers la page de login en cas de succes

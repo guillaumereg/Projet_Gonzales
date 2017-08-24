@@ -7,8 +7,8 @@ angular.module('offerController', ['offerServices', 'authServices']) //utiliser 
         $scope.createOffer = function() {
             Auth.getUser().then(function(data){
                 var username = data.data.username;
-                Offer.create({brand: $scope.brand, model: $scope.model,
-                              price: $scope.price, city: $scope.city, username: data.data.username})
+                Offer.create({brand: $scope.brand.toLowerCase(), model: $scope.model.toLowerCase(),
+                              price: $scope.price, city: $scope.city.toLowerCase(), username: data.data.username})
                 .then(function(data){
                     if (data.data.success) {
                         $location.path('/home');
