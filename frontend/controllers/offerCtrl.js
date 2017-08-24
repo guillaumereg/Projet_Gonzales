@@ -4,11 +4,32 @@ angular.module('offerController', ['offerServices', 'authServices']) //utiliser 
 
         $scope.offerMessage={};
         $scope.offerError=false;
+        var brandLower = {};
+        var modelLower = {};
+        var cityLower = {};
         $scope.createOffer = function() {
             Auth.getUser().then(function(data){
                 var username = data.data.username;
-                Offer.create({brand: $scope.brand.toLowerCase(), model: $scope.model.toLowerCase(),
-                              price: $scope.price, city: $scope.city.toLowerCase(), username: data.data.username})
+                if($scope.brand == "" || $scope.brand === undefined){
+                    brandLower = null;
+                }
+                else{
+                    brandLower = $scope.brand.toLowerCase();
+                }
+                if($scope.model === "" || $scope.model === undefined){
+                    modelLower = null;
+                }
+                else{
+                    modelLower = $scope.model.toLowerCase();
+                }
+                if($scope.city === "" || $scope.city === undefined){
+                    cityLower = null;
+                }
+                else{
+                    cityLower = $scope.city.toLowerCase();
+                }
+                Offer.create({brand: brandLower, model: modelLower,
+                              price: $scope.price, city: cityLower, username: data.data.username})
                 .then(function(data){
                     if (data.data.success) {
                         $location.path('/home');
