@@ -3,38 +3,22 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
   .controller('myProfilCtrl', function($location, Evaluation, User, Auth, Offer, $route, $scope) {   //add factory User !!!! pour utiliser ce factory du module  userservices
 
 
-    $scope.showProfile=false;
-    $scope.showEvaluation=false;
-    $scope.profile={};
+    $scope.showOtherProfile=false;
+    $scope.showEvaluation2=false;
+    $scope.OtherProfile={};
     $scope.evaluations={};
+    $scope.evaluations2={};
     var currentUser={};
-    Auth.getUser().then(function(data){
-        User.getUserByUsername({username: data.data.username}) //get user from database
-        .then(function(data){
-            if (data.data.success) {
-                $scope.user = data.data.user;
-            } else {
-                console.log(data.data.message);
-            }
-        });
-    });
-
-    Auth.getUser().then(function(data){
-        Evaluation.getEvaluationByUsername({username: data.data.username}) //get all evaluations from user from database
-        .then(function(data){
+    Auth.getUser().then(function(data){ //get current user + get all evaluations and selected offers from that user
+        $scope.user = data.data;
+        Evaluation.getEvaluationByUsername({username: data.data.username}) .then(function(data){
             if (data.data.success) {
                 $scope.evaluations = data.data.evaluations;
             } else {
                 console.log(data.data.message);
             }
         });
-    });
-
-    Auth.getUser().then(function(data){
-      Offer.getOffersByUsernameSelect({usernameSelect: data.data.username}) //get all offers from user from database
-        .then(function(data){
-            $scope.profile={};
-            $scope.showProfile=false;
+        Offer.getOffersByUsernameSelect({usernameSelect: data.data.username}).then(function(data){
             if (data.data.success) {
                 $scope.offers = data.data.offers;
             } else {
@@ -44,15 +28,15 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
     });
 
 
+
+
     $scope.goToProfile = function(username){
-        $scope.profile={};
-        $scope.evaluations={};
-        $scope.showEvaluation=false;
+        $scope.evaluations2={};
         currentUser=username;
-        User.getUserByUsername({username: username}).then(function(data){
+        User.getUserByUsername({username: currentUser}).then(function(data){
             if (data.data.success) {
-                $scope.showProfile=true;
-                $scope.profile=data.data.user;
+                $scope.showOtherProfile=true;
+                $scope.OtherProfile=data.data.user;
             }
             else{
                 console.log(data.data.message);
@@ -61,16 +45,36 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
     }
 
     $scope.goToEval = function(){
-        $scope.evaluations={};
         Evaluation.getEvaluationByUsername({username: currentUser}).then(function(data){
             if (data.data.success) {
-                $scope.showEvaluation=true;
-                $scope.evaluations=data.data.evaluations;
+                $scope.showEvaluation2=true;
+                $scope.evaluations2=data.data.evaluations;
             }
             else{
                 console.log(data.data.message);
             }
         });
+    }
+
+    $scope.maskProfil = function() {
+      $scope.showOtherProfile=false;
+      $scope.OtherProfile={};
+    }
+
+    $scope.maskEval = function() {
+      $scope.showEvaluation2=false;
+      $scope.evaluations2={};
+    }
+
+
+
+
+
+
+
+
+    $scope.changeProfil = function(user) {
+        $location.path('/changeProfil');
     }
 
     $scope.deleteOffer = function(offer) {
@@ -81,14 +85,6 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
                 console.log(data.data.message);
             }
         });
-    }
-
-    $scope.changeProfil = function(user) {
-        $location.path('/changeProfil');
-    }
-    $scope.maskProfil = function() {
-      $scope.showProfile=false;
-      $scope.profile={};
     }
 
   });
