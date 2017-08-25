@@ -3,6 +3,8 @@ angular.module('mainController', ['authServices'])
         var app = this;
 
         $rootScope.$on('$routeChangeStart', function(event, next){ // intercepter changement de route
+            $scope.showError=false;
+            $scope.error= {};
             if(!Auth.isLoggedIn()){//pas connecté
                 console.log('user is NOT logged in');
                 app.username = '';
