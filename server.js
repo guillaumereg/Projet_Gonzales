@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
-var passport = require('passport');
 var mongoose = require('mongoose');
 var path = require('path');
 var router = express.Router();
