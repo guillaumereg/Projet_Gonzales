@@ -1,7 +1,7 @@
 {
   "name": "projet",
   "version": "1.0.0",
-  "description": "",
+  "description": "projet lsinf1211",
   "main": "server.js",
   "scripts": {
     "test": "\"echo hello\""
@@ -9,7 +9,11 @@
   "author": "gui",
   "license": "ISC",
   "dependencies": {
-    "jsonwebtoken": "^7.4.1",
-    "morgan": "^1.8.2"
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "jsonwebtoken": "^7.4.3",
+    "mongoose": "^4.11.8",
+    "morgan": "^1.8.2",
+    "path": "^0.12.7"
   }
 }
