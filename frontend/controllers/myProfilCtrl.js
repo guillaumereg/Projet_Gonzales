@@ -8,32 +8,59 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
     $scope.OtherProfile={};
     $scope.evaluations={};
     $scope.evaluations2={};
-    var currentUser={};
-    Auth.getUser().then(function(data){ //get current user + get all evaluations and selected offers from that user
-        $scope.user = data.data;
-        Evaluation.getEvaluationByUsername({username: data.data.username}) .then(function(data){
+    $scope.user = {};
+    $scope.currentUser={};
+    var currentUser2={};
+
+
+    Auth.getUser().then(function(data){
+        User.getUserByUsername({username: data.data.username}) //get user from database
+        .then(function(data){
             if (data.data.success) {
-                $scope.evaluations = data.data.evaluations;
-            } else {
-                console.log(data.data.message);
-            }
-        });
-        Offer.getOffersByUsernameSelect({usernameSelect: data.data.username}).then(function(data){
-            if (data.data.success) {
-                $scope.offers = data.data.offers;
+                $scope.user = data.data.user;
             } else {
                 console.log(data.data.message);
             }
         });
     });
 
+    Auth.getUser().then(function(data){
+        Evaluation.getEvaluationByUsername({username: data.data.username}) //get all evaluations from user from database
+        .then(function(data){
+            if (data.data.success) {
+                $scope.evaluations = data.data.evaluations;
+            } else {
+                console.log(data.data.message);
+            }
+        });
+    });
+
+    Auth.getUser().then(function(data){
+      Offer.getOffersByUsernameSelect({usernameSelect: data.data.username}) //get all offers from user from database
+        .then(function(data){
+            $scope.profile={};
+            $scope.showProfile=false;
+            if (data.data.success) {
+                $scope.offers = data.data.offers;
+            } else {
+                console.log(data.data.message);
+            }
+        });
+});
+
+
+
+
+
+
+
 
 
 
     $scope.goToProfile = function(username){
         $scope.evaluations2={};
-        currentUser=username;
-        User.getUserByUsername({username: currentUser}).then(function(data){
+        currentUser2=username;
+        User.getUserByUsername({username: currentUser2}).then(function(data){
             if (data.data.success) {
                 $scope.showOtherProfile=true;
                 $scope.OtherProfile=data.data.user;
@@ -45,7 +72,7 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
     }
 
     $scope.goToEval = function(){
-        Evaluation.getEvaluationByUsername({username: currentUser}).then(function(data){
+        Evaluation.getEvaluationByUsername({username: currentUser2}).then(function(data){
             if (data.data.success) {
                 $scope.showEvaluation2=true;
                 $scope.evaluations2=data.data.evaluations;

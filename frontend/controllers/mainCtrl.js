@@ -17,6 +17,9 @@ angular.module('mainController', ['authServices'])
                     app.username = data.data.username;
                 });
                 app.loggedIn = true;
+                if($location.path() === '/'){
+                    $location.path('/home');
+                }
             }
         })
 
