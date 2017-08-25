@@ -10,7 +10,6 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
     $scope.evaluations2={};
     $scope.user = {};
     $scope.currentUser={};
-    var currentUser2={};
 
 
     Auth.getUser().then(function(data){
@@ -52,15 +51,10 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
 
 
 
-
-
-
-
-
     $scope.goToProfile = function(username){
         $scope.evaluations2={};
-        currentUser2=username;
-        User.getUserByUsername({username: currentUser2}).then(function(data){
+        currentUser=username;
+        User.getUserByUsername({username: currentUser}).then(function(data){
             if (data.data.success) {
                 $scope.showOtherProfile=true;
                 $scope.OtherProfile=data.data.user;
@@ -72,7 +66,7 @@ angular.module('myProfilController', ['evaluationService','authServices','userSe
     }
 
     $scope.goToEval = function(){
-        Evaluation.getEvaluationByUsername({username: currentUser2}).then(function(data){
+        Evaluation.getEvaluationByUsername({username: currentUser}).then(function(data){
             if (data.data.success) {
                 $scope.showEvaluation2=true;
                 $scope.evaluations2=data.data.evaluations;

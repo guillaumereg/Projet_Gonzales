@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 var mongoose = require('mongoose');
 var path = require('path');
 var router = express.Router();
@@ -19,7 +20,7 @@ app.use(express.static(__dirname + '/frontend')); //utilise tous les fichiers co
 app.use('/api',appRoutes);
 
 
-mongoose.connect('mongodb://localhost/rentCar', {useMongoClient: true});
+mongoose.connect('mongodb://localhost/rentCar');
 
 
 app.get('*', function(req, res) {
